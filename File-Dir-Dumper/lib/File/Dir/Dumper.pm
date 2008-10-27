@@ -5,52 +5,33 @@ use strict;
 
 =head1 NAME
 
-File::Dir::Dumper - The great new File::Dir::Dumper!
+File::Dir::Dumper - dump directory structures' meta-data in a consistent and 
+machine-readable way.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.0.1
 
 =cut
 
-our $VERSION = '0.01';
-
+our $VERSION = '0.0.1';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
     use File::Dir::Dumper;
 
-    my $foo = File::Dir::Dumper->new();
-    ...
+    my $dumper = File::Dir::Dumper->new(
+        {
+            output_to => \*STDOUT,
+            source => "/path/to/dir/to/dump",
+        }
+    );
 
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 FUNCTIONS
-
-=head2 function1
-
-=cut
-
-sub function1 {
-}
-
-=head2 function2
-
-=cut
-
-sub function2 {
-}
+=head1 METHODS
 
 =head1 AUTHOR
 
-Shlomi Fish, C<< <shlomif at cpan.org> >>
+Shlomi Fish, C<< <shlomif@cpan.org> >>
 
 =head1 BUGS
 
@@ -98,8 +79,7 @@ L<http://search.cpan.org/dist/File-Dir-Dumper>
 
 Copyright 2008 Shlomi Fish, all rights reserved.
 
-This program is released under the following license: mit
-
+This program is released under the following license: MIT/X11 Licence.
 
 =cut
 

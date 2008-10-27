@@ -1,5 +1,5 @@
 Revision history for File-Dir-Dumper
 
-0.01    Date/time
-        First version, released on an unsuspecting world.
-
+0.0.1   TODO : FILL IN
+        First version
+            - doesn't handle symbolic links.
