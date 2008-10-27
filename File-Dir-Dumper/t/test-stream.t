@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 8;
 
 use IO::String;
 
@@ -39,6 +39,48 @@ EOF
     is_deeply($reader->fetch(),
         {want => "you",},
         "->fetch works for second token",
+    );
+
+    # TEST
+    ok(!defined($reader->fetch), "No more tokens");
+}
+
+{
+    my $buffer = <<"EOF";
+# JSON Stream by Shlomif - Version 0.2.0
+{"type":"wonder","param1":["one","two","three"],"param2":"Lo and behold"}
+--/f
+{"type":"global","byte":{"zero":"conf"}}
+--/f
+EOF
+
+    my $in = IO::String->new($buffer);
+    my $reader = File::Dir::Dumper::Stream::JSON::Reader->new(
+        {
+            input => $in,
+        }
+    );
+
+    # TEST
+    ok ($reader, "Reader was initialised");
+
+    # TEST
+    is_deeply($reader->fetch(),
+        {
+            type => "wonder",
+            "param1" => [qw(one two three)],
+            "param2" => "Lo and behold",
+        },
+        "->fetch() works for first token - containing an arrayref",
+    );
+
+    # TEST
+    is_deeply($reader->fetch(),
+        {
+            type => "global",
+            byte => { zero => "conf", },
+        },
+        "->fetch works for second token (containing a hashref)",
     );
 
     # TEST
