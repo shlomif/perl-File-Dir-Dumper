@@ -3,6 +3,7 @@ Changes
 inc/Test/Run/Builder.pm
 lib/File/Dir/Dumper/Base.pm
 lib/File/Dir/Dumper.pm
+lib/File/Dir/Dumper/Scanner.pm
 lib/File/Dir/Dumper/Stream/JSON/Reader.pm
 lib/File/Dir/Dumper/Stream/JSON/Writer.pm
 Makefile.PL
@@ -11,6 +12,9 @@ META.yml
 README
 t/00-load.t
 t/boilerplate.t
+t/dumper.t
+t/lib/File/Find/Object/TreeCreate.pm
 t/pod-coverage.t
 t/pod.t
+t/sample-data/placeholder.txt
 t/test-stream.t
