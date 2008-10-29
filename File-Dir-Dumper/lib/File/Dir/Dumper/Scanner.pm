@@ -10,6 +10,7 @@ use Carp;
 use File::Find::Object;
 
 use POSIX qw(strftime);
+use List::Util qw(min);
 
 __PACKAGE__->mk_accessors(
     qw(
@@ -117,6 +118,37 @@ sub _populate_queue
     }
     else
     {
+        my $i = 0;
+        my $upper_limit =
+            min(
+                scalar(@{$last_result->dir_components()}),
+                scalar(@{$result->dir_components()}),
+            );
+        FIND_I:
+        while ($i < $upper_limit)
+        {
+            if ($last_result->dir_components()->[$i] ne 
+                $result->dir_components()->[$i]
+            )
+            {
+                last FIND_I;
+            }
+        }
+        continue
+        {
+            $i++;
+        }
+
+        for my $level (reverse($i .. $#{$last_result->dir_components()}))
+        {
+            $self->_add(
+                {
+                    type => "updir",
+                    depth => $level+1,
+                }
+            )
+        }
+
         if ($result->is_dir())
         {
             $self->_add(
