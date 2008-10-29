@@ -76,8 +76,18 @@ sub _init
 
     $self->_queue([]);
 
-    push @{$self->_queue()}, { type => "header", dir_to_dump => $dir_to_dump};
+    $self->_add({ type => "header", dir_to_dump => $dir_to_dump});
     
+    return;
+}
+
+sub _add
+{
+    my $self = shift;
+    my $token = shift;
+
+    push @{$self->_queue()}, $token;
+
     return;
 }
 
@@ -103,30 +113,32 @@ sub _populate_queue
 
     if (! $last_result)
     {
-        push @{$self->_queue()}, { type => "dir", depth => 0 };
+        $self->_add({ type => "dir", depth => 0 });
     }
     else
     {
         if ($result->is_dir())
         {
-             push @{$self->_queue()},
+            $self->_add(
                 {
                     type => "dir",
                     filename => $result->full_components()->[-1],
                     depth => scalar(@{$result->full_components()}),
-                };
+                }
+            );
         }
         else
         {
             my @stat = stat($result->path());
-            push @{$self->_queue()},
+            $self->_add(
                 {
                     type => "file",
                     filename => $result->basename(),
                     mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
                     size => $stat[7],
                     depth => scalar(@{$result->full_components()}),
-                };
+                }
+            );
         }
     }
 
