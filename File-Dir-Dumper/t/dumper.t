@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 8;
+use Test::More tests => 9;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -25,7 +25,7 @@ use File::Dir::Dumper::Scanner;
             {
                 'name' => "a.doc",
                 'contents' => "This file was spotted in the wild.",
-            },            
+            },
             {
                 'name' => "b/",
             },
@@ -84,9 +84,15 @@ use File::Dir::Dumper::Scanner;
     is ($token->{filename}, "a.doc", "Filename is OK.");
 
     # TEST
-    is ($token->{mtime}, 
+    is ($token->{mtime},
         strftime("%Y-%m-%dT%H:%M:%S", localtime($a_doc_time)),
         "mtime is OK.",
+    );
+
+    # TEST
+    is ($token->{size},
+        length("This file was spotted in the wild."),
+        "size is OK.",
     );
 
     # TEST

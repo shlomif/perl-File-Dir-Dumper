@@ -115,6 +115,7 @@ sub _populate_queue
                     type => "file",
                     filename => $result->basename(),
                     mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
+                    size => $stat[7],
                     depth => scalar(@{$result->full_components()}),
                 };
         }
