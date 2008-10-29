@@ -107,7 +107,16 @@ sub _populate_queue
     }
     else
     {
-        if (! $result->is_dir())
+        if ($result->is_dir())
+        {
+             push @{$self->_queue()},
+                {
+                    type => "dir",
+                    filename => $result->full_components()->[-1],
+                    depth => scalar(@{$result->full_components()}),
+                };
+        }
+        else
         {
             my @stat = stat($result->path());
             push @{$self->_queue()},
