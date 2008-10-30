@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 17;
+use Test::More tests => 20;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -127,6 +127,17 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{depth}, 1, "Token depth is 1");
+    
+    $token = $scanner->fetch();
+
+    # TEST
+    is ($token->{type}, "dir", "Token is dir");
+
+    # TEST
+    is ($token->{filename}, "yet", "dir name is 'yet'");
+
+    # TEST
+    is ($token->{depth}, 2, "Token depth is 2");
 
     rmtree($t->get_path($test_dir))
 }
