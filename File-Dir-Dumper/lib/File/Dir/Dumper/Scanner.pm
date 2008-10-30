@@ -126,15 +126,46 @@ sub _up_to_level
     return;
 }
 
+sub _find_new_common_depth
+{
+    my $self = shift;
+    my $result = shift;
+
+    my $last_result = $self->_last_result();
+
+    my $depth = 0;
+
+    my $upper_limit =
+        min(
+            scalar(@{$last_result->dir_components()}),
+            scalar(@{$result->dir_components()}),
+        );
+
+    FIND_I:
+    while ($depth < $upper_limit)
+    {
+        if ($last_result->dir_components()->[$depth] ne
+            $result->dir_components()->[$depth]
+        )
+        {
+            last FIND_I;
+        }
+    }
+    continue
+    {
+        $depth++;
+    }
+
+    return $depth;
+}
+
 sub _populate_queue
 {
     my $self = shift;
 
     my $result = $self->_file_find->next_obj();
 
-    my $last_result = $self->_last_result();
-
-    if (! $last_result)
+    if (! $self->_last_result())
     {
         $self->_add({ type => "dir", depth => 0 });
     }
@@ -144,28 +175,7 @@ sub _populate_queue
     }
     else
     {
-        my $i = 0;
-        my $upper_limit =
-            min(
-                scalar(@{$last_result->dir_components()}),
-                scalar(@{$result->dir_components()}),
-            );
-        FIND_I:
-        while ($i < $upper_limit)
-        {
-            if ($last_result->dir_components()->[$i] ne 
-                $result->dir_components()->[$i]
-            )
-            {
-                last FIND_I;
-            }
-        }
-        continue
-        {
-            $i++;
-        }
-
-        $self->_up_to_level($i);
+        $self->_up_to_level($self->_find_new_common_depth($result));
 
         if ($result->is_dir())
         {
