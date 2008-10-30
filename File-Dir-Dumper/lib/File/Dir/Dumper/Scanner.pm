@@ -104,6 +104,28 @@ sub fetch
     return shift(@{$self->_queue()});
 }
 
+sub _up_to_level
+{
+    my $self = shift;
+    my $target_level = shift;
+
+    my $last_result = $self->_last_result();
+
+    for my $level (
+        reverse($target_level .. $#{$last_result->dir_components()})
+    )
+    {
+        $self->_add(
+            {
+                type => "updir",
+                depth => $level+1,
+            }
+        )
+    }
+
+    return;
+}
+
 sub _populate_queue
 {
     my $self = shift;
@@ -115,6 +137,10 @@ sub _populate_queue
     if (! $last_result)
     {
         $self->_add({ type => "dir", depth => 0 });
+    }
+    elsif (! $result)
+    {
+        $self->_up_to_level(-1);
     }
     else
     {
@@ -139,15 +165,7 @@ sub _populate_queue
             $i++;
         }
 
-        for my $level (reverse($i .. $#{$last_result->dir_components()}))
-        {
-            $self->_add(
-                {
-                    type => "updir",
-                    depth => $level+1,
-                }
-            )
-        }
+        $self->_up_to_level($i);
 
         if ($result->is_dir())
         {

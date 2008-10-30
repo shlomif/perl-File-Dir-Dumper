@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 20;
+use Test::More tests => 24;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -112,10 +112,10 @@ use File::Dir::Dumper::Scanner;
     $token = $scanner->fetch();
 
     # TEST
-    is ($token->{type}, "updir", "Token is exitdir");
+    is ($token->{type}, "updir", "Token is updir");
 
     # TEST
-    is ($token->{depth}, 1, "exitdir token (from 'b') has depth 1");
+    is ($token->{depth}, 1, "updir token (from 'b') has depth 1");
 
     $token = $scanner->fetch();
 
@@ -138,6 +138,22 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{depth}, 2, "Token depth is 2");
+
+    $token = $scanner->fetch();
+
+    # TEST
+    is ($token->{type}, "updir", "Token is updir");
+
+    # TEST
+    is ($token->{depth}, 2, "Token depth is 2");
+    
+    $token = $scanner->fetch();
+
+    # TEST
+    is ($token->{type}, "updir", "Token is updir");
+
+    # TEST
+    is ($token->{depth}, 1, "Token depth is 2");
 
     rmtree($t->get_path($test_dir))
 }
