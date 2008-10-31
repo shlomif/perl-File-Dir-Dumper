@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 26;
+use Test::More tests => 28;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -162,6 +162,16 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{depth}, 0, "Token depth is 0");
+    
+    $token = $scanner->fetch();
+
+    # TEST
+    is ($token->{type}, "footer", "Token is footer");
+
+    $token = $scanner->fetch();
+
+    # TEST
+    ok (!defined($token), "Token is undefined - reached end.");
 
     rmtree($t->get_path($test_dir))
 }

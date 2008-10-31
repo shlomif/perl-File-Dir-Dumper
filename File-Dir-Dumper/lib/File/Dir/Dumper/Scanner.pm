@@ -15,8 +15,9 @@ use List::Util qw(min);
 __PACKAGE__->mk_accessors(
     qw(
     _file_find
-    _queue
     _last_result
+    _queue
+    _reached_end
     )
 );
 
@@ -163,6 +164,11 @@ sub _populate_queue
 {
     my $self = shift;
 
+    if ($self->_reached_end())
+    {
+        return;
+    }
+
     my $result = $self->_file_find->next_obj();
 
     if (! $self->_last_result())
@@ -172,6 +178,10 @@ sub _populate_queue
     elsif (! $result)
     {
         $self->_up_to_level(-1);
+
+        $self->_add({type => "footer"});
+
+        $self->_reached_end(1);
     }
     else
     {
