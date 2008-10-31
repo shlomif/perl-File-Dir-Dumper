@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 28;
+use Test::More tests => 30;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -65,6 +65,11 @@ use File::Dir::Dumper::Scanner;
     # TEST
     is ($token->{dir_to_dump}, $t->get_path($test_dir), 
         "dir_to_dump is OK."
+    );
+
+    # TEST
+    is ($token->{stream_type}, "Directory Dump",
+        "stream_type is OK."
     );
 
     $token = $scanner->fetch();
@@ -172,6 +177,11 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     ok (!defined($token), "Token is undefined - reached end.");
+
+    $token = $scanner->fetch();
+
+    # TEST
+    ok (!defined($token), "Token is undefined - make sure we don't restart");
 
     rmtree($t->get_path($test_dir))
 }

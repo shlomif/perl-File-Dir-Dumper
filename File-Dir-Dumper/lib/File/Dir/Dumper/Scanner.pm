@@ -78,7 +78,7 @@ sub _init
 
     $self->_queue([]);
 
-    $self->_add({ type => "header", dir_to_dump => $dir_to_dump});
+    $self->_add({ type => "header", dir_to_dump => $dir_to_dump, stream_type => "Directory Dump"});
     
     return;
 }
