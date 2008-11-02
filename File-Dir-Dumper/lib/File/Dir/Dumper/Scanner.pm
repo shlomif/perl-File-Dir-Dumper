@@ -187,32 +187,20 @@ sub _populate_queue
     {
         $self->_up_to_level($self->_find_new_common_depth($result));
 
-        if ($result->is_dir())
-        {
-            my @stat = stat($result->path());
-            $self->_add(
-                {
-                    type => "dir",
-                    filename => $result->full_components()->[-1],
-                    depth => scalar(@{$result->full_components()}),
-                    perms => sprintf("%04o", ($stat[2]&07777)),
-                }
-            );
-        }
-        else
-        {
-            my @stat = stat($result->path());
-            $self->_add(
-                {
-                    type => "file",
-                    filename => $result->basename(),
-                    mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
-                    size => $stat[7],
-                    perms => sprintf("%04o", ($stat[2]&07777)),
-                    depth => scalar(@{$result->full_components()}),
-                }
-            );
-        }
+        my @stat = stat($result->path());
+
+        $self->_add(
+            {
+                filename => $result->full_components()->[-1],
+                depth => scalar(@{$result->full_components()}),
+                perms => sprintf("%04o", ($stat[2]&07777)),
+                mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
+                ($result->is_dir()
+                    ? (type => "dir",)
+                    : (type => "file", size => $stat[7],)
+                ),
+            }
+        );
     }
 
     $self->_last_result($result);
