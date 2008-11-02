@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 31;
+use Test::More tests => 32;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -119,6 +119,13 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{filename}, "b", "dir name is 'b'");
+
+    # TEST
+    is ($token->{perms},
+        sprintf("%04o", ((stat($t->get_path("$test_dir/b/")))[2]&07777)),
+        "perms are OK."
+    );
+
 
     $token = $scanner->fetch();
 

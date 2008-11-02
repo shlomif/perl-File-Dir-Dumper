@@ -189,11 +189,13 @@ sub _populate_queue
 
         if ($result->is_dir())
         {
+            my @stat = stat($result->path());
             $self->_add(
                 {
                     type => "dir",
                     filename => $result->full_components()->[-1],
                     depth => scalar(@{$result->full_components()}),
+                    perms => sprintf("%04o", ($stat[2]&07777)),
                 }
             );
         }
