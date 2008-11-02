@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 30;
+use Test::More tests => 31;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -98,6 +98,12 @@ use File::Dir::Dumper::Scanner;
     is ($token->{size},
         length("This file was spotted in the wild."),
         "size is OK.",
+    );
+
+    # TEST
+    is ($token->{perms},
+        sprintf("%04o", ((stat($t->get_path("$test_dir/a.doc")))[2]&07777)),
+        "perms are OK."
     );
 
     # TEST

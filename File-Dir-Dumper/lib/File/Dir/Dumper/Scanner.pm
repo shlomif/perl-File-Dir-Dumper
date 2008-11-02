@@ -206,6 +206,7 @@ sub _populate_queue
                     filename => $result->basename(),
                     mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
                     size => $stat[7],
+                    perms => sprintf("%04o", ($stat[2]&07777)),
                     depth => scalar(@{$result->full_components()}),
                 }
             );
