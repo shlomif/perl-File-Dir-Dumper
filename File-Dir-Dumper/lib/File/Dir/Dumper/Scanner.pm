@@ -18,6 +18,7 @@ __PACKAGE__->mk_accessors(
     _last_result
     _queue
     _reached_end
+    _result
     )
 );
 
@@ -130,8 +131,8 @@ sub _up_to_level
 sub _find_new_common_depth
 {
     my $self = shift;
-    my $result = shift;
 
+    my $result = $self->_result();
     my $last_result = $self->_last_result();
 
     my $depth = 0;
@@ -160,6 +161,27 @@ sub _find_new_common_depth
     return $depth;
 }
 
+sub _calc_file_or_dir_token
+{
+    my $self = shift;
+
+    my $result = $self->_result();
+
+    my @stat = stat($result->path());
+
+    return
+    {
+        filename => $result->full_components()->[-1],
+        depth => scalar(@{$result->full_components()}),
+        perms => sprintf("%04o", ($stat[2]&07777)),
+        mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
+        ($result->is_dir()
+            ? (type => "dir",)
+            : (type => "file", size => $stat[7],)
+        ),
+    };
+}
+
 sub _populate_queue
 {
     my $self = shift;
@@ -169,13 +191,13 @@ sub _populate_queue
         return;
     }
 
-    my $result = $self->_file_find->next_obj();
+    $self->_result($self->_file_find->next_obj());
 
     if (! $self->_last_result())
     {
         $self->_add({ type => "dir", depth => 0 });
     }
-    elsif (! $result)
+    elsif (! $self->_result())
     {
         $self->_up_to_level(-1);
 
@@ -185,25 +207,14 @@ sub _populate_queue
     }
     else
     {
-        $self->_up_to_level($self->_find_new_common_depth($result));
-
-        my @stat = stat($result->path());
+        $self->_up_to_level($self->_find_new_common_depth());
 
         $self->_add(
-            {
-                filename => $result->full_components()->[-1],
-                depth => scalar(@{$result->full_components()}),
-                perms => sprintf("%04o", ($stat[2]&07777)),
-                mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
-                ($result->is_dir()
-                    ? (type => "dir",)
-                    : (type => "file", size => $stat[7],)
-                ),
-            }
+            $self->_calc_file_or_dir_token()
         );
     }
 
-    $self->_last_result($result);
+    $self->_last_result($self->_result());
 }
 
 =head1 AUTHOR
