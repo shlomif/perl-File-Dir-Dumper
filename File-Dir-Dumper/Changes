@@ -1,5 +1,8 @@
 Revision history for File-Dir-Dumper
 
-0.0.1   TODO : FILL IN
+0.0.1   Mon Nov  3 08:20:10 IST 2008
         First version
             - doesn't handle symbolic links.
+            - documentation:
+                - dir-dump -o to-file.txt $dir_to_dump
+
