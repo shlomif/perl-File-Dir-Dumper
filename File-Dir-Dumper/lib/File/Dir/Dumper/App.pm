@@ -8,7 +8,9 @@ use base 'File::Dir::Dumper::Base';
 use Carp;
 
 use Getopt::Long qw(GetOptionsFromArray);
+
 use File::Dir::Dumper::Scanner;
+use File::Dir::Dumper::Stream::JSON::Writer;
 
 __PACKAGE__->mk_accessors(
     qw(
