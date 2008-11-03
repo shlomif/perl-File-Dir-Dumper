@@ -19,4 +19,5 @@ t/lib/File/Find/Object/TreeCreate.pm
 t/pod-coverage.t
 t/pod.t
 t/sample-data/placeholder.txt
+t/script.t
 t/test-stream.t
