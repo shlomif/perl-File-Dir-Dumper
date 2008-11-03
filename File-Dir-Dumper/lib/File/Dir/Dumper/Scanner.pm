@@ -15,10 +15,12 @@ use List::Util qw(min);
 __PACKAGE__->mk_accessors(
     qw(
     _file_find
+    _group_cache
     _last_result
     _queue
     _reached_end
     _result
+    _user_cache
     )
 );
 
@@ -80,6 +82,9 @@ sub _init
     $self->_queue([]);
 
     $self->_add({ type => "header", dir_to_dump => $dir_to_dump, stream_type => "Directory Dump"});
+
+    $self->_user_cache({});
+    $self->_group_cache({});
     
     return;
 }
@@ -161,6 +166,32 @@ sub _find_new_common_depth
     return $depth;
 }
 
+sub _get_user_name
+{
+    my $self = shift;
+    my $uid = shift;
+
+    if (!exists($self->_user_cache()->{$uid}))
+    {
+        $self->_user_cache()->{$uid} = scalar(getpwuid($uid));
+    }
+
+    return $self->_user_cache()->{$uid};
+}
+
+sub _get_group_name
+{
+    my $self = shift;
+    my $gid = shift;
+
+    if (!exists($self->_group_cache()->{$gid}))
+    {
+        $self->_group_cache()->{$gid} = scalar(getgrgid($gid));
+    }
+
+    return $self->_group_cache()->{$gid};
+}
+
 sub _calc_file_or_dir_token
 {
     my $self = shift;
@@ -175,6 +206,8 @@ sub _calc_file_or_dir_token
         depth => scalar(@{$result->full_components()}),
         perms => sprintf("%04o", ($stat[2]&07777)),
         mtime => strftime("%Y-%m-%dT%H:%M:%S", localtime($stat[9])),
+        user => $self->_get_user_name($stat[4]),
+        group => $self->_get_group_name($stat[5]),
         ($result->is_dir()
             ? (type => "dir",)
             : (type => "file", size => $stat[7],)

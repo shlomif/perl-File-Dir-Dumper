@@ -3,10 +3,11 @@
 use strict;
 use warnings;
 
-use Test::More tests => 32;
+use Test::More tests => 36;
 
 use POSIX qw(mktime strftime);
 use File::Path;
+use English;
 
 use File::Spec;
 use lib File::Spec->catdir(File::Spec->curdir(), "t", "lib");
@@ -107,6 +108,19 @@ use File::Dir::Dumper::Scanner;
     );
 
     # TEST
+    is ($token->{user},
+        scalar(getpwuid($UID)),
+        "user is OK."
+    );
+
+    # TEST
+    is ($token->{group},
+        scalar(getgrgid($GID)),
+        "group is OK."
+    );
+    
+
+    # TEST
     is ($token->{depth}, 1, "Token depth is 1");
 
     $token = $scanner->fetch();
@@ -126,6 +140,17 @@ use File::Dir::Dumper::Scanner;
         "perms are OK."
     );
 
+    # TEST
+    is ($token->{user},
+        scalar(getpwuid($UID)),
+        "user is OK."
+    );
+
+    # TEST
+    is ($token->{group},
+        scalar(getgrgid($GID)),
+        "group is OK."
+    );
 
     $token = $scanner->fetch();
 
