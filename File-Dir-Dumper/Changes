@@ -1,5 +1,9 @@
 Revision history for File-Dir-Dumper
 
+0.0.2   Mon Nov  3 14:25:03 IST 2008
+        - Fixed the ::App module - it didn't "use" JSON::Writer.
+        - Added a test script for the ::App module.
+
 0.0.1   Mon Nov  3 08:20:10 IST 2008
         First version
             - doesn't handle symbolic links.
