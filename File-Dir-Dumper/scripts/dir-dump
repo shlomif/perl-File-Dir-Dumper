@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use File::Dir::Dumper::App;
+
+my $app = File::Dir::Dumper::App->new({argv => \@ARGV});
+exit($app->run());
+

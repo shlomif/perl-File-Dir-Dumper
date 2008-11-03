@@ -41,13 +41,13 @@ our $VERSION = '0.0.1';
 
     use File::Dir::Dumper::Scanner;
 
-    my $writer = File::Dir::Dumper::Scanner->new(
+    my $scanner = File::Dir::Dumper::Scanner->new(
         {
             dir => $dir_pathname
         }
     );
 
-    while (defined(my $token = File::Dir::Dumper::Scanner->fetch()))
+    while (defined(my $token = $scanner->fetch()))
     {
     }
 
