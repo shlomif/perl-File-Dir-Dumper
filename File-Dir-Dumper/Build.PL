@@ -13,8 +13,14 @@ my $builder = Test::Run::Builder->new(
     dist_version_from   => 'lib/File/Dir/Dumper.pm',
     requires => {
         'Class::Accessor' => 0,
+        'Carp' => 0,
         'File::Find::Object' => '0.1.2',
+        'Getopt::Long' => '2.36',
         'JSON' => 0,
+        'List::Util' => 0,
+        'POSIX' => 0,
+        'strict' => 0,
+        'warnings' => 0,
     },
     build_requires => {
         'Test::More' => 0,

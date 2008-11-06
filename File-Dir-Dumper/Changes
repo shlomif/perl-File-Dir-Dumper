@@ -1,5 +1,9 @@
 Revision history for File-Dir-Dumper
 
+0.0.3   Thu Nov  6 11:06:06 IST 2008
+        - Added more dependencies to the Build.PL, including the up-to-date
+        version of Getopt::Long, with GetOptionsFromArray.
+
 0.0.2   Mon Nov  3 14:25:03 IST 2008
         - Fixed the ::App module - it didn't "use" JSON::Writer.
         - Added a test script for the ::App module.
