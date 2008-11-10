@@ -8,3 +8,30 @@ use File::Dir::Dumper::App;
 my $app = File::Dir::Dumper::App->new({argv => \@ARGV});
 exit($app->run());
 
+
+=head1 NAME
+
+dir-dump - the File::Dir::Dumper command line application.
+
+=head1 SYNOPSIS
+
+B<quadp> [-o output-file.txt] /path/to/directory/to/dump
+
+(B<quadp> B<--man> displays the man page)
+
+=head1 DESCRIPTION
+
+Run this program with the path to the directory to dump to produce a dump
+on the standard output.
+
+Run it with B<-o output-file.txt> to write to output-file.txt.
+
+=head1 SEE ALSO
+
+L<http://search.cpan.org/dist/File-Dir-Dumper/> - File-Dir-Dumper on the CPAN.
+
+=head1 AUTHOR
+
+Shlomi Fish, L<http://www.shlomifish.org/>
+
+=cut
