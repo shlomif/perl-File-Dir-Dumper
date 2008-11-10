@@ -1,5 +1,6 @@
 Revision history for File-Dir-Dumper
 
+0.0.4   Mon Nov 10 19:33:03 IST 2008
         - In 'build_requires' - changed IO::Scalar (which we're not
         using in the tests) to IO::String (which we do).
         - added the --help flag and the man page to dir-dump.
