@@ -1,5 +1,8 @@
 Revision history for File-Dir-Dumper
 
+        - In 'build_requires' - changed IO::Scalar (which we're not
+        using in the tests) to IO::String (which we do).
+
 0.0.3   Thu Nov  6 11:06:06 IST 2008
         - Added more dependencies to the Build.PL, including the up-to-date
         version of Getopt::Long, with GetOptionsFromArray.

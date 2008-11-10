@@ -24,7 +24,7 @@ my $builder = Test::Run::Builder->new(
     },
     build_requires => {
         'Test::More' => 0,
-        'IO::Scalar' => 0,
+        'IO::String' => 0,
     },
     add_to_cleanup      => [ 'File-Dir-Dumper-*' ],
     script_files => ["scripts/dir-dump",],
