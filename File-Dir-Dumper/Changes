@@ -1,5 +1,10 @@
 Revision history for File-Dir-Dumper
 
+0.0.5   Thu Nov 13 12:12:06 IST 2008
+        - Fixed dumper.t to resolve this test problem:
+            - http://www.nntp.perl.org/group/perl.cpan.testers/2008/11/msg2597312.html
+            - the GID was setgid'ed or something.
+
 0.0.4   Mon Nov 10 19:33:03 IST 2008
         - In 'build_requires' - changed IO::Scalar (which we're not
         using in the tests) to IO::String (which we do).

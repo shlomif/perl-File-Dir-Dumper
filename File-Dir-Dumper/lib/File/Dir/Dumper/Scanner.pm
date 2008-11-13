@@ -31,11 +31,11 @@ hash-refs
 
 =head1 VERSION
 
-Version 0.0.4
+Version 0.0.5
 
 =cut
 
-our $VERSION = '0.0.4';
+our $VERSION = '0.0.5';
 
 =head1 SYNOPSIS
 

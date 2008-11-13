@@ -115,10 +115,9 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{group},
-        scalar(getgrgid($GID)),
+        scalar(getgrgid((stat($t->get_path("$test_dir/a.doc")))[5])),
         "group is OK."
     );
-    
 
     # TEST
     is ($token->{depth}, 1, "Token depth is 1");
@@ -148,7 +147,7 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{group},
-        scalar(getgrgid($GID)),
+        scalar(getgrgid((stat($t->get_path("$test_dir/b/")))[5])),
         "group is OK."
     );
 
