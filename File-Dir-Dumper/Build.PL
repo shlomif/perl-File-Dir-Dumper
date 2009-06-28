@@ -29,7 +29,35 @@ my $builder = Test::Run::Builder->new(
     add_to_cleanup      => [ 'File-Dir-Dumper-*' ],
     script_files => ["scripts/dir-dump",],
     create_makefile_pl => 'traditional',
-
+    meta_merge =>
+    {
+        resources =>
+        {
+            repository => "http://svn.berlios.de/svnroot/repos/web-cpan/File-Dir-Dumper/",
+            homepage => "http://www.shlomifish.org/open-source/projects/File-Dir-Dumper/",
+        },
+        keywords =>
+        [
+            "depth",
+            "dir",
+            "directory",
+            "dumper",
+            "file",
+            "filename",
+            "group",
+            "json",
+            "length",
+            "meta-data",
+            "mtime",
+            "permissions",
+            "pure-perl",
+            "size",
+            "stream",
+            "traverse",
+            "tree",
+            "user",
+        ],
+    },
 );
 
 $builder->create_build_script();
