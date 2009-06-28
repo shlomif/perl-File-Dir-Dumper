@@ -1,4 +1,5 @@
 Build.PL
+bump-version-number.pl
 Changes
 inc/Test/Run/Builder.pm
 lib/File/Dir/Dumper/App.pm

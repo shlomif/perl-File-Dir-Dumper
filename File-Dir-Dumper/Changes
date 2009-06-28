@@ -1,5 +1,8 @@
 Revision history for File-Dir-Dumper
 
+0.0.6   Sun Jun 28 10:36:56 IDT 2009
+        - Added resources and keywords to the META.yml.
+
 0.0.5   Thu Nov 13 12:12:06 IST 2008
         - Fixed dumper.t to resolve this test problem:
             - http://www.nntp.perl.org/group/perl.cpan.testers/2008/11/msg2597312.html
