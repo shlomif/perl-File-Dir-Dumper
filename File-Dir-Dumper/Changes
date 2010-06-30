@@ -1,6 +1,6 @@
 Revision history for File-Dir-Dumper
 
-0.0.7
+0.0.7   Wed Jun 30 20:09:13 IDT 2010
         - Hopefully fixed the tests (and functionality) on Windows by
         using getpwent only on Unix systems.
             - Thanks to Devel-CheckOS.

@@ -17,11 +17,11 @@ File::Dir::Dumper::Stream::JSON::Reader - reader for stream of JSON objects.
 
 =head1 VERSION
 
-Version 0.0.6
+Version 0.0.7
 
 =cut
 
-our $VERSION = '0.0.6';
+our $VERSION = '0.0.7';
 
 =head1 SYNOPSIS
 
