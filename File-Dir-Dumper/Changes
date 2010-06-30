@@ -1,5 +1,10 @@
 Revision history for File-Dir-Dumper
 
+0.0.7
+        - Hopefully fixed the tests (and functionality) on Windows by
+        using getpwent only on Unix systems.
+            - Thanks to Devel-CheckOS.
+
 0.0.6   Sun Jun 28 10:36:56 IDT 2009
         - Added resources and keywords to the META.yml.
 

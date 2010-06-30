@@ -7,7 +7,9 @@ use Test::More tests => 36;
 
 use POSIX qw(mktime strftime);
 use File::Path;
-use English;
+use English qw( -no_match_vars );
+
+use Devel::CheckOS qw(:booleans);
 
 use File::Spec;
 use lib File::Spec->catdir(File::Spec->curdir(), "t", "lib");
@@ -109,13 +111,17 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{user},
-        scalar(getpwuid($UID)),
+        File::Dir::Dumper::Scanner::_my_getpwuid($UID),
         "user is OK."
     );
 
     # TEST
     is ($token->{group},
-        scalar(getgrgid((stat($t->get_path("$test_dir/a.doc")))[5])),
+        (
+            os_is('Unix')
+            ? scalar(getgrgid((stat($t->get_path("$test_dir/a.doc")))[5]))
+            : "unknown"
+        ),
         "group is OK."
     );
 
@@ -141,13 +147,17 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{user},
-        scalar(getpwuid($UID)),
+        File::Dir::Dumper::Scanner::_my_getpwuid($UID),
         "user is OK."
     );
 
     # TEST
     is ($token->{group},
-        scalar(getgrgid((stat($t->get_path("$test_dir/b/")))[5])),
+        (
+            os_is('Unix')
+            ? scalar(getgrgid((stat($t->get_path("$test_dir/b/")))[5]))
+            : "unknown"
+        ),
         "group is OK."
     );
 

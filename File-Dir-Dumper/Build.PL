@@ -14,6 +14,7 @@ my $builder = Test::Run::Builder->new(
     requires => {
         'Class::Accessor' => 0,
         'Carp' => 0,
+        'Devel::CheckOS' => 0,
         'File::Find::Object' => '0.1.2',
         'Getopt::Long' => '2.36',
         'JSON' => 0,
@@ -23,12 +24,13 @@ my $builder = Test::Run::Builder->new(
         'warnings' => 0,
     },
     build_requires => {
-        'Test::More' => 0,
+        'Devel::CheckOS' => 0,
         'IO::String' => 0,
+        'Test::More' => 0,
     },
     add_to_cleanup      => [ 'File-Dir-Dumper-*' ],
     script_files => ["scripts/dir-dump",],
-    create_makefile_pl => 'traditional',
+    create_makefile_pl => 'passthrough',
     meta_merge =>
     {
         resources =>

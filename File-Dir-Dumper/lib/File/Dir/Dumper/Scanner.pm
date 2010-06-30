@@ -8,6 +8,7 @@ use base 'File::Dir::Dumper::Base';
 use Carp;
 
 use File::Find::Object;
+use Devel::CheckOS qw(:booleans);
 
 use POSIX qw(strftime);
 use List::Util qw(min);
@@ -166,6 +167,26 @@ sub _find_new_common_depth
     return $depth;
 }
 
+BEGIN
+{
+    if (os_is('Unix'))
+    {
+        *_my_getpwuid =
+            sub {
+                my $uid = shift; return scalar(getpwuid($uid)); 
+            };
+        *_my_getgrgid = 
+            sub {
+                my $gid = shift; return scalar(getgrgid($gid));
+            };
+    }
+    else
+    {
+        *_my_getpwuid = sub { return "unknown"; };
+        *_my_getgrgid = sub { return "unknown"; };
+    }
+}
+
 sub _get_user_name
 {
     my $self = shift;
@@ -173,7 +194,7 @@ sub _get_user_name
 
     if (!exists($self->_user_cache()->{$uid}))
     {
-        $self->_user_cache()->{$uid} = scalar(getpwuid($uid));
+        $self->_user_cache()->{$uid} = _my_getpwuid($uid);
     }
 
     return $self->_user_cache()->{$uid};
@@ -186,7 +207,7 @@ sub _get_group_name
 
     if (!exists($self->_group_cache()->{$gid}))
     {
-        $self->_group_cache()->{$gid} = scalar(getgrgid($gid));
+        $self->_group_cache()->{$gid} = _my_getgrgid($gid);
     }
 
     return $self->_group_cache()->{$gid};
