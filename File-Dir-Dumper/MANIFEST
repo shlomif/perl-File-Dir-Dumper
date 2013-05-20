@@ -1,5 +1,4 @@
 Build.PL
-bump-version-number.pl
 Changes
 inc/Test/Run/Builder.pm
 lib/File/Dir/Dumper/App.pm
@@ -12,6 +11,7 @@ Makefile.PL
 MANIFEST
 META.yml
 README
+scripts/bump-version-number.pl
 scripts/dir-dump
 t/00-load.t
 t/boilerplate.t
@@ -22,3 +22,4 @@ t/pod.t
 t/sample-data/placeholder.txt
 t/script.t
 t/test-stream.t
+META.json
