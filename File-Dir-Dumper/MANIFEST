@@ -14,6 +14,7 @@ scripts/bump-version-number.pl
 scripts/dir-dump
 t/00-load.t
 t/boilerplate.t
+t/cpan-changes.t
 t/dumper.t
 t/lib/File/Find/Object/TreeCreate.pm
 t/pod-coverage.t
