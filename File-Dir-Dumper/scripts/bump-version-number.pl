@@ -8,7 +8,7 @@ use IO::All;
 
 my $tree = File::Find::Object->new({}, 'lib/');
 
-my $new_version = "0.0.7";
+my $new_version = "0.0.8";
 my $version_re = qr{\d+\.\d+\.\d+};
 
 while (my $r = $tree->next()) {

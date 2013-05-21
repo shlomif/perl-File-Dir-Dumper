@@ -10,11 +10,11 @@ machine-readable way.
 
 =head1 VERSION
 
-Version 0.0.7
+Version 0.0.8
 
 =cut
 
-our $VERSION = '0.0.7';
+our $VERSION = '0.0.8';
 
 =head1 SYNOPSIS
 
