@@ -1,3 +1,9 @@
+v0.0.8  2013-05-21
+
+        - Convert the Changes (this file) to t/cpan-changes.t.
+        - Get rid of Makefile.PL.
+        - Move to scripts/bump-version-number.pl
+
 v0.0.7   2010-06-30
 
         - Hopefully fixed the tests (and functionality) on Windows by
