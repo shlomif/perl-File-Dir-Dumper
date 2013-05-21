@@ -1,6 +1,6 @@
 File-Dir-Dumper
 
-File-Dir-Dumper aims to dump directory structures in a consistent, machine 
+File-Dir-Dumper aims to dump directory structures in a consistent, machine
 parsable and moderately-human-readable way. It makes use of File-Find-Object,
 and the JSON format.
 

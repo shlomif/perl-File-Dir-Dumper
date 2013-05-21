@@ -86,7 +86,7 @@ sub _init
 
     $self->_user_cache({});
     $self->_group_cache({});
-    
+
     return;
 }
 
@@ -173,9 +173,9 @@ BEGIN
     {
         *_my_getpwuid =
             sub {
-                my $uid = shift; return scalar(getpwuid($uid)); 
+                my $uid = shift; return scalar(getpwuid($uid));
             };
-        *_my_getgrgid = 
+        *_my_getgrgid =
             sub {
                 my $gid = shift; return scalar(getgrgid($gid));
             };

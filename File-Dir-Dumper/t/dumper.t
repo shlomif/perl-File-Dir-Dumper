@@ -66,7 +66,7 @@ use File::Dir::Dumper::Scanner;
     is ($token->{type}, "header", "Token is of type header");
 
     # TEST
-    is ($token->{dir_to_dump}, $t->get_path($test_dir), 
+    is ($token->{dir_to_dump}, $t->get_path($test_dir),
         "dir_to_dump is OK."
     );
 
@@ -179,7 +179,7 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{depth}, 1, "Token depth is 1");
-    
+
     $token = $scanner->fetch();
 
     # TEST
@@ -198,7 +198,7 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{depth}, 2, "Token depth is 2");
-    
+
     $token = $scanner->fetch();
 
     # TEST
@@ -214,7 +214,7 @@ use File::Dir::Dumper::Scanner;
 
     # TEST
     is ($token->{depth}, 0, "Token depth is 0");
-    
+
     $token = $scanner->fetch();
 
     # TEST

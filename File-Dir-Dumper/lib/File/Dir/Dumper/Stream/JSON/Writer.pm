@@ -40,7 +40,7 @@ our $VERSION = '0.0.7';
     .
     .
     .
-    
+
     $writer->close();
 
 =head1 METHODS

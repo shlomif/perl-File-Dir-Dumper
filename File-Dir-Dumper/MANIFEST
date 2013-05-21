@@ -21,5 +21,6 @@ t/pod-coverage.t
 t/pod.t
 t/sample-data/placeholder.txt
 t/script.t
+t/style-trailing-space.t
 t/test-stream.t
 META.json

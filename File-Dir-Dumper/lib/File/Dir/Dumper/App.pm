@@ -23,7 +23,7 @@ __PACKAGE__->mk_accessors(
 
 =head1 NAME
 
-File::Dir::Dumper::App - a command line app-implemented as a class to do the 
+File::Dir::Dumper::App - a command line app-implemented as a class to do the
 dumping.
 
 =head1 VERSION
@@ -72,7 +72,7 @@ sub _init
     );
 
     pod2usage(1) if $help;
-    pod2usage(-exitstatus => 0, -verbose => 2) if $man;    
+    pod2usage(-exitstatus => 0, -verbose => 2) if $man;
 
     my $dir_to_dump = shift(@$argv);
 

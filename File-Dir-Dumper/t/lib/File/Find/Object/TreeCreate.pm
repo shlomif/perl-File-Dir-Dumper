@@ -29,7 +29,7 @@ sub get_path
     {
         push @components, File::Spec->curdir();
     }
-    
+
     my $is_dir = ($path =~ s{/$}{});
     push @components, split(/\//, $path);
     if ($is_dir)
@@ -79,11 +79,11 @@ sub ls
     my $self = shift;
     opendir my $dir, $self->get_path(@_) or
         return undef;
-    my @files = 
-        sort { $a cmp $b } 
+    my @files =
+        sort { $a cmp $b }
         grep { !(($_ eq ".") || ($_ eq "..")) }
         readdir($dir);
-    closedir($dir);    
+    closedir($dir);
     return \@files;
 }
 

@@ -4,6 +4,7 @@ v0.0.8  2013-05-21
         - Get rid of Makefile.PL.
         - Move to scripts/bump-version-number.pl
         - Update the repository URL.
+        - Get rid of trailing space - t/style-trailing-space.t .
 
 v0.0.7   2010-06-30
 
