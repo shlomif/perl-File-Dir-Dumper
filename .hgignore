@@ -5,3 +5,6 @@ File-Dir-Dumper/MYMETA.json
 File-Dir-Dumper/MYMETA.yml
 File-Dir-Dumper/_build
 File-Dir-Dumper/blib
+
+syntax: regexp
+^File-Dir-Dumper/File-Dir-Dumper-v\d+\.\d+\.\d+(\.tar\.gz$|/)
