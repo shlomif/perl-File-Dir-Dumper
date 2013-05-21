@@ -37,7 +37,7 @@ my $builder = Test::Run::Builder->new(
     {
         resources =>
         {
-            repository => "http://svn.berlios.de/svnroot/repos/web-cpan/File-Dir-Dumper/",
+            repository => "http://bitbucket.org/shlomif/perl-file-dir-dumper",
             homepage => "http://www.shlomifish.org/open-source/projects/File-Dir-Dumper/",
         },
         keywords =>
