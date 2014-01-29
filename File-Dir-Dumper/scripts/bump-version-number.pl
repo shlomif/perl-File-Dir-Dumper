@@ -8,7 +8,8 @@ use IO::All;
 
 my $tree = File::Find::Object->new({}, 'lib/');
 
-my $new_version = "0.0.8";
+my $new_version = shift(@ARGV)
+    or die "Usage: perl scripts/bump-version-number.pl 0.0.1";
 my $version_re = qr{\d+\.\d+\.\d+};
 
 while (my $r = $tree->next()) {

@@ -13,11 +13,11 @@ File::Dir::Dumper::Base - base class for File::Dir::Dumper. B<for internal use>
 
 =head1 VERSION
 
-Version 0.0.8
+Version 0.0.9
 
 =cut
 
-our $VERSION = '0.0.8';
+our $VERSION = '0.0.9';
 
 
 =head1 METHODS
