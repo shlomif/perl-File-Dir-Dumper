@@ -3,6 +3,8 @@ package File::Dir::Dumper::Stream::JSON::Writer;
 use warnings;
 use strict;
 
+use 5.012;
+
 use base 'File::Dir::Dumper::Base';
 
 use Carp;

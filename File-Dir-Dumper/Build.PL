@@ -20,6 +20,7 @@ my $builder = Test::Run::Builder->new(
         'JSON' => 0,
         'List::Util' => 0,
         'POSIX' => 0,
+        'perl' => '5.012',
         'strict' => 0,
         'warnings' => 0,
     },

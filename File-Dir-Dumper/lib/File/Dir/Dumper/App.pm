@@ -3,6 +3,8 @@ package File::Dir::Dumper::App;
 use warnings;
 use strict;
 
+use 5.012;
+
 use base 'File::Dir::Dumper::Base';
 
 use Carp;

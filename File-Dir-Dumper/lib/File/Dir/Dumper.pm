@@ -3,6 +3,8 @@ package File::Dir::Dumper;
 use warnings;
 use strict;
 
+use 5.012;
+
 =head1 NAME
 
 File::Dir::Dumper - dump directory structures' meta-data in a consistent and

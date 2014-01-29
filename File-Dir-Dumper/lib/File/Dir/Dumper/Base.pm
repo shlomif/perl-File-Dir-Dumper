@@ -3,6 +3,8 @@ package File::Dir::Dumper::Base;
 use warnings;
 use strict;
 
+use 5.012;
+
 use base 'Class::Accessor';
 
 =head1 NAME
