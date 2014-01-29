@@ -19,6 +19,7 @@ my $builder = Test::Run::Builder->new(
         'Getopt::Long' => '2.36',
         'JSON' => 0,
         'List::Util' => 0,
+        'parent' => 0,
         'POSIX' => 0,
         'perl' => '5.012',
         'strict' => 0,

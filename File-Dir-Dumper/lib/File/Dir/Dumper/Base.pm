@@ -5,7 +5,7 @@ use strict;
 
 use 5.012;
 
-use base 'Class::Accessor';
+use parent 'Class::Accessor';
 
 =head1 NAME
 
