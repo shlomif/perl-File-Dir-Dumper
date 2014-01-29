@@ -1,5 +1,6 @@
 v0.0.9  2014-01-29
         - Minimum version of perl is 5.12.x (for CPANTS Kwalitee).
+        - Add a standalone LICENSE file (for CPANTS Kwalitee).
 
 v0.0.8  2013-05-21
 

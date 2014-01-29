@@ -7,6 +7,7 @@ lib/File/Dir/Dumper.pm
 lib/File/Dir/Dumper/Scanner.pm
 lib/File/Dir/Dumper/Stream/JSON/Reader.pm
 lib/File/Dir/Dumper/Stream/JSON/Writer.pm
+LICENSE
 MANIFEST
 META.yml
 README
