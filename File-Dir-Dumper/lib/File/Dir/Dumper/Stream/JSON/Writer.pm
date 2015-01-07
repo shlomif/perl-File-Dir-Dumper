@@ -9,7 +9,7 @@ use parent 'File::Dir::Dumper::Base';
 
 use Carp;
 
-use JSON;
+use JSON::MaybeXS ();
 
 __PACKAGE__->mk_accessors(qw(_out));
 
@@ -95,7 +95,7 @@ sub put
     my $self = shift;
     my $token = shift;
 
-    $self->_print(to_json($token));
+    $self->_print(JSON::MaybeXS->new(canonical => 1)->encode($token));
     $self->_print("--/f");
 
     return;

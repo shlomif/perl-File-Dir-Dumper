@@ -9,7 +9,7 @@ use parent 'File::Dir::Dumper::Base';
 
 use Carp;
 
-use JSON;
+use JSON::MaybeXS qw(decode_json);
 
 __PACKAGE__->mk_accessors(qw(_in));
 
@@ -108,7 +108,7 @@ sub fetch
         $line = $self->_readline();
         if ($line eq "--/f\n")
         {
-            return from_json($buffer);
+            return decode_json($buffer);
         }
         else
         {

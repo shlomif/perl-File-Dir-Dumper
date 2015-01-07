@@ -1,3 +1,6 @@
+v0.0.10 2015-01-07
+        - Convert from JSON.pm to JSON::MaybeXS which is more recommended.
+
 v0.0.9  2014-01-29
         - Minimum version of perl is 5.12.x (for CPANTS Kwalitee).
         - Add a standalone LICENSE file (for CPANTS Kwalitee).
