@@ -19,11 +19,11 @@ File::Dir::Dumper::Stream::JSON::Writer - writer for a stream of JSON data.
 
 =head1 VERSION
 
-Version 0.0.9
+Version 0.0.10
 
 =cut
 
-our $VERSION = '0.0.9';
+our $VERSION = '0.0.10';
 
 =head1 SYNOPSIS
 
