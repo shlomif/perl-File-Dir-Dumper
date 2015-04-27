@@ -22,6 +22,9 @@ perldoc command.
 
 You can also look for information at:
 
+    MetaCPAN
+        http://metacpan.org/release/File-Dir-Dumper
+
     RT, CPAN's request tracker
         http://rt.cpan.org/NoAuth/Bugs.html?Dist=File-Dir-Dumper
 
@@ -30,9 +33,6 @@ You can also look for information at:
 
     CPAN Ratings
         http://cpanratings.perl.org/d/File-Dir-Dumper
-
-    Search CPAN
-        http://search.cpan.org/dist/File-Dir-Dumper
 
 
 COPYRIGHT AND LICENCE
