@@ -1,3 +1,6 @@
+v0.0.11 2016-09-05
+        - Convert the repository to git and GitHub.
+
 v0.0.10 2015-01-07
         - Convert from JSON.pm to JSON::MaybeXS which is more recommended.
 

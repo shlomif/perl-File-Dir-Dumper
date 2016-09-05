@@ -39,7 +39,7 @@ my $builder = Test::Run::Builder->new(
     {
         resources =>
         {
-            repository => "http://bitbucket.org/shlomif/perl-file-dir-dumper",
+            repository => "https://github.com/shlomif/perl-File-Dir-Dumper",
             homepage => "http://www.shlomifish.org/open-source/projects/File-Dir-Dumper/",
         },
         keywords =>
