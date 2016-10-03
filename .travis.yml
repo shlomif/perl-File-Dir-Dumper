@@ -12,6 +12,7 @@ before_install:
     - cpanm Test::CPAN::Changes Test::Pod::Coverage Test::TrailingSpace
 
 install:
+    - cd File-Dir-Dumper
     - cpanm -v --installdeps --notest .
 
 script:
