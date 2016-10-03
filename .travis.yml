@@ -16,6 +16,5 @@ install:
     - cpanm -v --installdeps --notest .
 
 script:
-    - cd File-Dir-Dumper
     - perl Build.PL
     - ./Build test
