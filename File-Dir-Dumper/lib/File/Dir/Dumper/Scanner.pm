@@ -15,17 +15,16 @@ use Devel::CheckOS qw(:booleans);
 use POSIX qw(strftime);
 use List::Util qw(min);
 
-__PACKAGE__->mk_accessors(
-    qw(
-    _file_find
-    _group_cache
-    _last_result
-    _queue
-    _reached_end
-    _result
-    _user_cache
-    )
-);
+use Class::XSAccessor
+    accessors => {
+        _file_find => '_file_find',
+        _group_cache => '_group_cache',
+        _last_result => '_last_result',
+        _queue => '_queue',
+        _reached_end => '_reached_end',
+        _result => '_result',
+        _user_cache => '_user_cache',
+    };
 
 =head1 NAME
 

@@ -10,8 +10,8 @@ use parent 'File::Dir::Dumper::Base';
 use Carp;
 
 use JSON::MaybeXS ();
-
-__PACKAGE__->mk_accessors(qw(_out));
+use Class::XSAccessor
+    accessors => { _out => '_out' };
 
 =head1 NAME
 

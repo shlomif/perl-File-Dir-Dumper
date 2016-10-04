@@ -10,8 +10,8 @@ use parent 'File::Dir::Dumper::Base';
 use Carp;
 
 use JSON::MaybeXS qw(decode_json);
-
-__PACKAGE__->mk_accessors(qw(_in));
+use Class::XSAccessor
+    accessors => { _in => 'in' };
 
 =head1 NAME
 

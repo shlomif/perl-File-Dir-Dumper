@@ -15,13 +15,12 @@ use Pod::Usage;
 use File::Dir::Dumper::Scanner;
 use File::Dir::Dumper::Stream::JSON::Writer;
 
-__PACKAGE__->mk_accessors(
-    qw(
-    _out_to_stdout
-    _out_filename
-    _dir_to_dump
-    )
-);
+use Class::XSAccessor
+    accessors => {
+        _out_to_stdout => '_out_to_stdout',
+        _out_filename => '_out_filename',
+        _dir_to_dump => '_dir_to_dump',
+    };
 
 =head1 NAME
 

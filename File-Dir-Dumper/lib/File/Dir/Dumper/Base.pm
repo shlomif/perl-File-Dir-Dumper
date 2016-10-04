@@ -5,8 +5,6 @@ use strict;
 
 use 5.012;
 
-use parent 'Class::Accessor';
-
 =head1 NAME
 
 File::Dir::Dumper::Base - base class for File::Dir::Dumper. B<for internal use>
