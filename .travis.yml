@@ -24,5 +24,3 @@ install:
     - "(cd File-Dir-Dumper/ && dzil listdeps   --author --missing | grep -vP '[^\\w:]' | cpanm --verbose)"
 script:
     - "cd File-Dir-Dumper/ && dzil smoke --release --author"
-    - cd File-Dir-Dumper
-    - cpanm -v --installdeps --notest .
