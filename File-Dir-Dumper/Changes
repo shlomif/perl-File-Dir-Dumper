@@ -1,3 +1,10 @@
+v0.2.0  2016-11-30
+        - Add the digests parameter to lib/File/Dir/Dumper/Scanner.pm .
+            - With tests
+            - See https://github.com/shlomif/perl-File-Dir-Dumper/issues/3 .
+            - Thanks to @Snelius30 for a commit that implemented an incomplete
+            feature, but which still proved of some use.
+
 v0.0.11 2016-09-05
         - Convert the repository to git and GitHub.
 

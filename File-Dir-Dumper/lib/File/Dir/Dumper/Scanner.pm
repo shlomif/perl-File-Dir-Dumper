@@ -2,6 +2,7 @@ package File::Dir::Dumper::Scanner;
 
 use warnings;
 use strict;
+use autodie;
 
 use 5.012;
 
@@ -17,6 +18,7 @@ use List::Util qw(min);
 
 use Class::XSAccessor
     accessors => {
+        _digests => '_digests',
         _file_find => '_file_find',
         _group_cache => '_group_cache',
         _last_result => '_last_result',
@@ -26,6 +28,7 @@ use Class::XSAccessor
         _user_cache => '_user_cache',
     };
 
+use Digest ();
 =head1 NAME
 
 File::Dir::Dumper::Scanner - scans a directory and returns a stream of Perl
@@ -55,9 +58,11 @@ our $VERSION = '0.0.11';
 
 =head1 METHODS
 
-=head2 $self->new({ dir => $dir_path})
+=head2 $self->new({ dir => $dir_path, digests => [LIST]})
 
-Scans the directory $dir_path.
+Scans the directory $dir_path with the L<Digest>'s digests as contained
+in the list of strings pointed by the digests array reference. C<digests>
+is optional.
 
 =head2 my $hash_ref = $self->fetch()
 
@@ -84,6 +89,25 @@ sub _init
     $self->_queue([]);
 
     $self->_add({ type => "header", dir_to_dump => $dir_to_dump, stream_type => "Directory Dump"});
+
+    $self->_digests(undef());
+    if (exists($args->{digests}))
+    {
+        my $digests = {};
+        foreach my $d (@{ $args->{digests} })
+        {
+            if (exists $digests->{$d})
+            {
+                Carp::confess( "Duplicate digest '$d'!" );
+            }
+            $digests->{$d} = 1;
+        }
+        if (! %$digests)
+        {
+            Carp::confess( "The list of digests is empty." );
+        }
+        $self->_digests([sort {$a cmp $b} keys%$digests]);
+    }
 
     $self->_user_cache({});
     $self->_group_cache({});
@@ -214,6 +238,31 @@ sub _get_group_name
     return $self->_group_cache()->{$gid};
 }
 
+sub _calc_file_digests_key
+{
+    my $self = shift;
+
+    my $digests = $self->_digests;
+
+    if (!defined$digests)
+    {
+        return [];
+    }
+    my $result = $self->_result();
+    my $path = $result->path;
+    my %ret;
+    foreach my $d (@$digests)
+    {
+        my $o = Digest->new($d);
+        open my $fh, '<', $path;
+        binmode $fh;
+        $o->addfile($fh);
+        $ret{$d} = $o->hexdigest;
+        close ($fh);
+    }
+    return [digests => \%ret];
+}
+
 sub _calc_file_or_dir_token
 {
     my $self = shift;
@@ -232,7 +281,11 @@ sub _calc_file_or_dir_token
         group => $self->_get_group_name($stat[5]),
         ($result->is_dir()
             ? (type => "dir",)
-            : (type => "file", size => $stat[7],)
+            : (
+                type => "file",
+                size => $stat[7],
+                @{$self->_calc_file_digests_key()},
+            )
         ),
     };
 }
