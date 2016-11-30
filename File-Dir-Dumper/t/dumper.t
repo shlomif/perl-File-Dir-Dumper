@@ -18,6 +18,9 @@ use File::Find::Object::TreeCreate;
 
 use File::Dir::Dumper::Scanner;
 
+use Digest::MD5;
+use Digest::SHA;
+
 
 {
     my $tree =
