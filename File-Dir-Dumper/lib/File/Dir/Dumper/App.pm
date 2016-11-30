@@ -17,6 +17,7 @@ use File::Dir::Dumper::Stream::JSON::Writer;
 
 use Class::XSAccessor
     accessors => {
+        _digests => '_digests',
         _out_to_stdout => '_out_to_stdout',
         _out_filename => '_out_filename',
         _dir_to_dump => '_dir_to_dump',
@@ -63,14 +64,15 @@ sub _init
     my $argv = $args->{'argv'};
 
     my $output_dest;
-
+    my @digests;
     my ($help, $man);
 
     GetOptionsFromArray($argv,
+        "digest=s" => \@digests,
         "output|o=s" => \$output_dest,
         'help|h' => \$help,
         'man' => \$man,
-    );
+    ) or die "parsing options failed - $!";
 
     pod2usage(1) if $help;
     pod2usage(-exitstatus => 0, -verbose => 2) if $man;
@@ -86,7 +88,7 @@ sub _init
     {
         $self->_out_to_stdout(1);
     }
-
+    $self->_digests(\@digests);
     $self->_dir_to_dump($dir_to_dump);
 
     return;
@@ -106,9 +108,14 @@ sub run
         open $out, ">", $self->_out_filename();
     }
 
+    my $digests = $self->_digests;
+
     my $scanner = File::Dir::Dumper::Scanner->new(
         {
             dir => $self->_dir_to_dump(),
+            (
+                (@$digests ? (digests => $digests) : ()),
+            ),
         }
     );
     my $writer = File::Dir::Dumper::Stream::JSON::Writer->new(
