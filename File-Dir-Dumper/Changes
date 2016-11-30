@@ -4,6 +4,8 @@ v0.2.0  2016-11-30
             - See https://github.com/shlomif/perl-File-Dir-Dumper/issues/3 .
             - Thanks to @Snelius30 for a commit that implemented an incomplete
             feature, but which still proved of some use.
+        - Convert from Class-Accessor to Class-XSAccessor
+        - Convert to Dist-Zilla
 
 v0.0.11 2016-09-05
         - Convert the repository to git and GitHub.
