@@ -30,11 +30,11 @@ dumping.
 
 =head1 VERSION
 
-Version 0.0.11
+Version 0.2.1
 
 =cut
 
-our $VERSION = '0.0.11';
+our $VERSION = '0.2.1';
 
 =head1 SYNOPSIS
 
