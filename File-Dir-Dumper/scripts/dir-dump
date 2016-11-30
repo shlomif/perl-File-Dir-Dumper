@@ -15,9 +15,9 @@ dir-dump - the File::Dir::Dumper command line application.
 
 =head1 SYNOPSIS
 
-B<quadp> [-o output-file.txt] /path/to/directory/to/dump
+B<dir-dump> [-o output-file.txt] /path/to/directory/to/dump
 
-(B<quadp> B<--man> displays the man page)
+(B<dir-dump> B<--man> displays the man page)
 
 =head1 DESCRIPTION
 
@@ -26,9 +26,13 @@ on the standard output.
 
 Run it with B<-o output-file.txt> to write to output-file.txt.
 
+One can also specify multiple B<--digest [digest]> arguments in order to
+specify which digests to calculate for each plain file. See the L<Digest>
+module for information.
+
 =head1 SEE ALSO
 
-L<http://search.cpan.org/dist/File-Dir-Dumper/> - File-Dir-Dumper on the CPAN.
+L<http://metacpan.org/release/File-Dir-Dumper> - File-Dir-Dumper on the CPAN.
 
 =head1 AUTHOR
 
