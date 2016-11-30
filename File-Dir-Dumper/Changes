@@ -1,3 +1,7 @@
+v0.2.1  2016-11-30
+        - Add MANIFEST.SKIP and remove temporary files.
+        - Fix the previous release.
+
 v0.2.0  2016-11-30
         - Add the digests parameter to lib/File/Dir/Dumper/Scanner.pm .
             - With tests
