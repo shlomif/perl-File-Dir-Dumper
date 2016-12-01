@@ -17,14 +17,6 @@ use Class::XSAccessor
 
 File::Dir::Dumper::Stream::JSON::Reader - reader for stream of JSON objects.
 
-=head1 VERSION
-
-Version 0.0.11
-
-=cut
-
-our $VERSION = '0.0.11';
-
 =head1 SYNOPSIS
 
     use File::Dir::Dumper::Stream::JSON::Reader;

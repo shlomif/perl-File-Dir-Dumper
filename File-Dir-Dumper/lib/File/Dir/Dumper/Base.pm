@@ -9,15 +9,6 @@ use 5.012;
 
 File::Dir::Dumper::Base - base class for File::Dir::Dumper. B<for internal use>
 
-=head1 VERSION
-
-Version 0.0.11
-
-=cut
-
-our $VERSION = '0.0.11';
-
-
 =head1 METHODS
 
 =head2 File::Dir::Dumper::Base->new()

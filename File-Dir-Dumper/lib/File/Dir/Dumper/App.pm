@@ -28,14 +28,6 @@ use Class::XSAccessor
 File::Dir::Dumper::App - a command line app-implemented as a class to do the
 dumping.
 
-=head1 VERSION
-
-Version 0.0.11
-
-=cut
-
-our $VERSION = '0.0.11';
-
 =head1 SYNOPSIS
 
     use File::Dir::Dumper::App;

@@ -34,14 +34,6 @@ use Digest ();
 File::Dir::Dumper::Scanner - scans a directory and returns a stream of Perl
 hash-refs
 
-=head1 VERSION
-
-Version 0.0.11
-
-=cut
-
-our $VERSION = '0.0.11';
-
 =head1 SYNOPSIS
 
     use File::Dir::Dumper::Scanner;

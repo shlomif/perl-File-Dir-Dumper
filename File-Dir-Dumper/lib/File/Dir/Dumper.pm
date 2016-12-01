@@ -10,14 +10,6 @@ use 5.012;
 File::Dir::Dumper - dump directory structures' meta-data in a consistent and
 machine-readable way.
 
-=head1 VERSION
-
-Version 0.0.11
-
-=cut
-
-our $VERSION = '0.0.11';
-
 =head1 SYNOPSIS
 
     use File::Dir::Dumper;
