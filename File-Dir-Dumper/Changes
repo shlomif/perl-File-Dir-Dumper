@@ -1,3 +1,10 @@
+v0.2.2  2016-12-01
+        - Unify the versions of the .pm files
+            - https://github.com/shlomif/perl-File-Dir-Dumper/pull/11
+            - Thanks to @manwar for reporting the problem and for two pull-reqs.
+        - Hopefully Fix the tests on MS Windows.
+            - Thanks to CPAN Testers for noticing.
+
 v0.2.1  2016-11-30
         - Add MANIFEST.SKIP and remove temporary files.
         - Fix the previous release.

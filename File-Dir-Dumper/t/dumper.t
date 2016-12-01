@@ -248,7 +248,7 @@ use Digest::SHA;
             },
             {
                 'name' => "cat.txt",
-                'contents' => "Meow Meow\n",
+                'contents' => "Meow Meow",
             },
             {
                 'name' => "foo/",
@@ -335,8 +335,8 @@ use Digest::SHA;
     is_deeply (
         $token->{digests},
         +{
-            MD5 => '2aa48e4588adb2357dd9c5ac4ef1c191',
-            'SHA-512' => '265702ac97739a435322d2b6f4caec983e3f370056c75fe03c9226aad31479b92ed8b4a4dfe2137dbbe5039b27c9f39a7f25b8957a9ddb8d849ff8c01e1fcaac',
+            MD5 => '02e86f5c3569cf659e6d39644b681fd9',
+            'SHA-512' => '5e8d0710ab13e35f252306006db7dda8e1d244ecbdf0ecacccf41c396bb9f547427890c0ec32c04f59ca079dc4d9e6ad57782804aea1282a926356a03cafaa00',
         },
         "cat.txt digests."
     );
