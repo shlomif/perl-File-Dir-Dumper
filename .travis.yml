@@ -26,5 +26,4 @@ install:
     - "(cd File-Dir-Dumper/ && dzil listdeps   --author --missing | grep -vP '[^\\w:]' | cpanm --verbose)"
 script:
     - "cd File-Dir-Dumper/ && dzil smoke --release --author" 
-    - "ls -l"
     - "export PERL5LIB=$PWD/lib && sparrow plg run perl-file-dir-dumper-smoke"
