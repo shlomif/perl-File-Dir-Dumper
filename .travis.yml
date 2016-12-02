@@ -2,11 +2,11 @@ sudo: false
 language: "perl"
 perl:
     - "5.22"
-#    - "5.20"
-#    - "5.18"
-#    - "5.16"
-#    - "5.14"
-#    - "5.12"
+    - "5.20"
+    - "5.18"
+    - "5.16"
+    - "5.14"
+    - "5.12"
 matrix:
     allow_failures:
         - perl: 'blead'
@@ -26,4 +26,5 @@ install:
     - "(cd File-Dir-Dumper/ && dzil listdeps   --author --missing | grep -vP '[^\\w:]' | cpanm --verbose)"
 script:
     - "cd File-Dir-Dumper/ && dzil smoke --release --author" 
+    - "ls -l"
     - "export PERL5LIB=$PWD/lib && sparrow plg run perl-file-dir-dumper-smoke"
