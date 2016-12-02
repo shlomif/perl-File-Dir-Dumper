@@ -27,4 +27,3 @@ install:
 script:
     - "cd File-Dir-Dumper/ && dzil smoke --release --author"
     - "export PERL5LIB=$PWD/lib && sparrow plg run perl-file-dir-dumper-smoke"
-
