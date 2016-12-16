@@ -1,3 +1,7 @@
+v0.2.3  2016-12-17
+        - Hopefully install "dir-dump" again.
+            - Caught by building the Mageia package - thanks!
+
 v0.2.2  2016-12-01
         - Unify the versions of the .pm files
             - https://github.com/shlomif/perl-File-Dir-Dumper/pull/11
