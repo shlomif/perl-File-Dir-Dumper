@@ -3,7 +3,7 @@
 use Test::More tests => 2;
 
 BEGIN {
-	use_ok( 'File::Dir::Dumper' );
+    use_ok( 'File::Dir::Dumper' );
     use_ok( 'File::Dir::Dumper::App' );
 }
 
