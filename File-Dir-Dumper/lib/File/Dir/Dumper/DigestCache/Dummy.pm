@@ -27,4 +27,17 @@ sub _init
     return;
 }
 
+=head2 $cache->get_digests({calc_cb => sub { return +{...}}})
+
+Returns whatever calc_cb returns. A passthrough.
+
+=cut
+
+sub get_digests
+{
+    my ($self, $args) = @_;
+
+    return $args->{calc_cb}->();
+}
+
 1; # End of File::Dir::Dumper
