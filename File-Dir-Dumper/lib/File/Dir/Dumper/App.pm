@@ -17,6 +17,8 @@ use File::Dir::Dumper::Stream::JSON::Writer;
 
 use Class::XSAccessor
     accessors => {
+        _digest_cache => '_digest_cache',
+        _digest_cache_params => '_digest_cache_params',
         _digests => '_digests',
         _out_to_stdout => '_out_to_stdout',
         _out_filename => '_out_filename',
@@ -58,8 +60,12 @@ sub _init
     my $output_dest;
     my @digests;
     my ($help, $man);
+    my $digest_cache = 'Dummy';
+    my %cache_params;
 
     GetOptionsFromArray($argv,
+        'digest-cache=s' => \$digest_cache,
+        'digest-cache-param=s' => \%cache_params,
         "digest=s" => \@digests,
         "output|o=s" => \$output_dest,
         'help|h' => \$help,
@@ -82,6 +88,8 @@ sub _init
     }
     $self->_digests(\@digests);
     $self->_dir_to_dump($dir_to_dump);
+    $self->_digest_cache($digest_cache);
+    $self->_digest_cache_params(\%cache_params);
 
     return;
 }
@@ -108,6 +116,8 @@ sub run
             (
                 (@$digests ? (digests => $digests) : ()),
             ),
+            digest_cache => $self->_digest_cache,
+            digest_cache_params => $self->_digest_cache_params,
         }
     );
     my $writer = File::Dir::Dumper::Stream::JSON::Writer->new(
