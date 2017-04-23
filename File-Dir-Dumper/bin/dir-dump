@@ -30,6 +30,12 @@ One can also specify multiple B<--digest [digest]> arguments in order to
 specify which digests to calculate for each plain file. See the L<Digest>
 module for information.
 
+=head2 Digests' Cache
+
+In order to speed up the digests' calculation in subsequent runs, one can
+specify B<--digest-cache FS> and
+B<--digest-cache-param path="$HOME/path/to/dedicated/cache/dir"> .
+
 =head1 SEE ALSO
 
 L<http://metacpan.org/release/File-Dir-Dumper> - File-Dir-Dumper on the CPAN.
