@@ -252,7 +252,7 @@ sub _get_group_name
 
 sub _calc_file_digests_key
 {
-    my $self = shift;
+    my ($self, $stat) = @_;
 
     my $digests = $self->_digests;
 
@@ -262,17 +262,27 @@ sub _calc_file_digests_key
     }
     my $result = $self->_result();
     my $path = $result->path;
-    my %ret;
-    foreach my $d (@$digests)
-    {
-        my $o = Digest->new($d);
-        open my $fh, '<', $path;
-        binmode $fh;
-        $o->addfile($fh);
-        $ret{$d} = $o->hexdigest;
-        close ($fh);
-    }
-    return [digests => \%ret];
+    my $ret = $self->_digest_cache->get_digests(
+        {
+            path => $result->full_components,
+            mtime => $stat->[9],
+            digests => $digests,
+            calc_cb => sub {
+                my %ret;
+                foreach my $d (@$digests)
+                {
+                    my $o = Digest->new($d);
+                    open my $fh, '<', $path;
+                    binmode $fh;
+                    $o->addfile($fh);
+                    $ret{$d} = $o->hexdigest;
+                    close ($fh);
+                }
+                return \%ret;
+            },
+        }
+    );
+    return [digests => $ret,];
 }
 
 sub _calc_file_or_dir_token
@@ -296,7 +306,7 @@ sub _calc_file_or_dir_token
             : (
                 type => "file",
                 size => $stat[7],
-                @{$self->_calc_file_digests_key()},
+                @{$self->_calc_file_digests_key(\@stat)},
             )
         ),
     };
