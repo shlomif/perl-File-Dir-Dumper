@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 49;
+use Test::More tests => 62;
 
 use POSIX qw(mktime strftime);
 use File::Path;
@@ -13,6 +13,7 @@ use Devel::CheckOS qw(:booleans);
 
 use File::Spec;
 use lib File::Spec->catdir(File::Spec->curdir(), "t", "lib");
+use File::Temp qw/ tempdir /;
 
 use File::Find::Object::TreeCreate;
 
@@ -236,6 +237,8 @@ use Digest::SHA;
     rmtree($t->get_path($test_dir))
 }
 
+# TEST:$digests=2;
+foreach my $is_cache (0, 1)
 {
     my $tree =
     {
@@ -270,10 +273,17 @@ use Digest::SHA;
     my $a_doc_time = mktime(1, 2, 3, 4, 5, 106);
     utime($a_doc_time, $a_doc_time, $t->get_path("$test_dir/a.doc"));
 
+    my $tempdir = tempdir( CLEANUP => 1);
     my $scanner = File::Dir::Dumper::Scanner->new(
         {
             dir => $t->get_path($test_dir),
             digests => [qw(SHA-512 MD5)],
+            ($is_cache
+                ? (digest_cache => 'FS', digest_cache_params => {
+                    path => $tempdir,
+                })
+                : ()
+            ),
         }
     );
 
@@ -281,36 +291,36 @@ use Digest::SHA;
 
     $token = $scanner->fetch();
 
-    # TEST
+    # TEST*$digests
     is ($token->{type}, "header", "Token is of type header");
 
-    # TEST
+    # TEST*$digests
     is ($token->{dir_to_dump}, $t->get_path($test_dir),
         "dir_to_dump is OK."
     );
 
-    # TEST
+    # TEST*$digests
     is ($token->{stream_type}, "Directory Dump",
         "stream_type is OK."
     );
 
     $token = $scanner->fetch();
 
-    # TEST
+    # TEST*$digests
     is ($token->{type}, "dir", "type is dir");
 
-    # TEST
+    # TEST*$digests
     is ($token->{depth}, 0, "depth is 0");
 
     $token = $scanner->fetch();
 
-    # TEST
+    # TEST*$digests
     is ($token->{type}, "file", "Type is file");
 
-    # TEST
+    # TEST*$digests
     is ($token->{filename}, "a.doc", "Filename is OK.");
 
-    # TEST
+    # TEST*$digests
     is_deeply (
         $token->{digests},
         +{
@@ -320,18 +330,18 @@ use Digest::SHA;
         "a.doc digests."
     );
 
-    # TEST
+    # TEST*$digests
     is ($token->{depth}, 1, "Token depth is 1");
 
     $token = $scanner->fetch();
 
-    # TEST
+    # TEST*$digests
     is ($token->{type}, "file", "Type is file");
 
-    # TEST
+    # TEST*$digests
     is ($token->{filename}, "cat.txt", "Filename is OK.");
 
-    # TEST
+    # TEST*$digests
     is_deeply (
         $token->{digests},
         +{
@@ -341,7 +351,7 @@ use Digest::SHA;
         "cat.txt digests."
     );
 
-    # TEST
+    # TEST*$digests
     is ($token->{depth}, 1, "Token depth is 1");
 
     rmtree($t->get_path($test_dir))
