@@ -18,6 +18,7 @@ use List::Util qw(min);
 
 use Class::XSAccessor
     accessors => {
+        _digest_cache => '_digest_cache',
         _digests => '_digests',
         _file_find => '_file_find',
         _group_cache => '_group_cache',
@@ -100,6 +101,25 @@ sub _init
         }
         $self->_digests([sort {$a cmp $b} keys%$digests]);
     }
+    my $base = ($args->{digest_cache} || 'Dummy');
+    if ($base !~ /\A[A-Za-z_][A-Za-z_0-9]*\z/)
+    {
+        Carp::confess( "Invalid digest_cache format." );
+    }
+    my $cl = "File::Dir::Dumper::DigestCache::$base";
+    eval "require $cl";
+    if ($@)
+    {
+        die $@;
+    }
+    $self->_digest_cache(
+        scalar $cl->new(
+            {
+                params => ($args->{digest_cache_params} || +{}),
+
+            }
+        )
+    );
 
     $self->_user_cache({});
     $self->_group_cache({});
