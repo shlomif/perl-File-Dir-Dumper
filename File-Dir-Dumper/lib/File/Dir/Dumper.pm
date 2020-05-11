@@ -84,4 +84,4 @@ This program is released under the following license: MIT/X11 Licence.
 
 =cut
 
-1; # End of File::Dir::Dumper
+1;    # End of File::Dir::Dumper

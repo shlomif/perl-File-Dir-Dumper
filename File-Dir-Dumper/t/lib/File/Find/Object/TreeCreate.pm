@@ -1,8 +1,10 @@
 package File::Find::Object::TreeCreate;
 
+use autodie;
 use strict;
 use warnings;
 
+use Carp       ();
 use File::Spec ();
 
 sub new
@@ -78,7 +80,7 @@ sub ls
 {
     my $self = shift;
     opendir my $dir, $self->get_path(@_)
-        or return undef;
+        or Carp::confess("opendir failed!");
     my @files =
         sort { $a cmp $b }
         grep { !( ( $_ eq "." ) || ( $_ eq ".." ) ) } readdir($dir);

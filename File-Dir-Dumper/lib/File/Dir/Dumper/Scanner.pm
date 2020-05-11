@@ -113,7 +113,9 @@ sub _init
         Carp::confess("Invalid digest_cache format.");
     }
     my $cl = "File::Dir::Dumper::DigestCache::$base";
+    ## no critic
     eval "require $cl";
+    ## use critic
     if ($@)
     {
         die $@;
@@ -287,6 +289,7 @@ sub _calc_file_digests_key
     );
     return [ digests => $ret, ];
 }
+my $PERM_MASK = oct('07777');
 
 sub _calc_file_or_dir_token
 {
@@ -299,7 +302,7 @@ sub _calc_file_or_dir_token
     return {
         filename => $result->full_components()->[-1],
         depth    => scalar( @{ $result->full_components() } ),
-        perms    => sprintf( "%04o", ( $stat[2] & 07777 ) ),
+        perms    => sprintf( "%04o", ( $stat[2] & $PERM_MASK ) ),
         mtime    => strftime( "%Y-%m-%dT%H:%M:%S", localtime( $stat[9] ) ),
         user     => $self->_get_user_name( $stat[4] ),
         group    => $self->_get_group_name( $stat[5] ),

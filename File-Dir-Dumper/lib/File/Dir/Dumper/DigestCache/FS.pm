@@ -8,10 +8,7 @@ use parent 'File::Dir::Dumper::Base';
 
 use 5.012;
 
-use Class::XSAccessor
-    accessors => {
-        _path => '_path',
-    };
+use Class::XSAccessor accessors => { _path => '_path', };
 
 use File::Basename qw/ dirname /;
 use File::Spec ();
@@ -33,11 +30,11 @@ B<TODO> - see the tests.
 
 sub _init
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
     my $basepath = $args->{params}->{path}
         or die "path not specified as a parameter!";
-    $self->_path(File::Spec->catdir($basepath, 'digests-cache-dir'));
+    $self->_path( File::Spec->catdir( $basepath, 'digests-cache-dir' ) );
 
     return;
 }
@@ -63,30 +60,32 @@ sub _slurp
     return $contents;
 }
 
-
 sub get_digests
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
     my $mtime = $args->{mtime};
-    my $path = File::Spec->catfile($self->_path, @{$args->{path}});
-    my $cb = $args->{calc_cb};
+    my $path  = File::Spec->catfile( $self->_path, @{ $args->{path} } );
+    my $cb    = $args->{calc_cb};
 
     my $update = sub {
         open my $out, '>', $path;
-        $out->print(JSON::MaybeXS->new(canonical => 1)->encode(+{mtime => $mtime, digests => scalar($cb->())}));
+        $out->print( JSON::MaybeXS->new( canonical => 1 )
+                ->encode( +{ mtime => $mtime, digests => scalar( $cb->() ) } )
+        );
         close $out;
 
         return;
     };
-    if (! -f $path)
+    if ( !-f $path )
     {
-        make_path(dirname($path));
+        make_path( dirname($path) );
         $update->();
     }
     while (1)
     {
-        my $json = JSON::MaybeXS->new(canonical => 1)->decode(_slurp($path));
-        if ($json->{mtime} == $mtime)
+        my $json =
+            JSON::MaybeXS->new( canonical => 1 )->decode( _slurp($path) );
+        if ( $json->{mtime} == $mtime )
         {
             return $json->{digests};
         }
@@ -98,4 +97,4 @@ sub get_digests
     die "Bug";
 }
 
-1; # End of File::Dir::Dumper
+1;    # End of File::Dir::Dumper

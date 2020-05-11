@@ -22,7 +22,7 @@ B<TODO> - see the tests.
 
 sub _init
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
     return;
 }
@@ -35,9 +35,9 @@ Returns whatever calc_cb returns. A passthrough.
 
 sub get_digests
 {
-    my ($self, $args) = @_;
+    my ( $self, $args ) = @_;
 
     return $args->{calc_cb}->();
 }
 
-1; # End of File::Dir::Dumper
+1;    # End of File::Dir::Dumper

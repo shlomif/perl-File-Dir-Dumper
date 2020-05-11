@@ -10,8 +10,7 @@ use parent 'File::Dir::Dumper::Base';
 use Carp ();
 
 use JSON::MaybeXS ();
-use Class::XSAccessor
-    accessors => { _out => '_out' };
+use Class::XSAccessor accessors => { _out => '_out' };
 
 =head1 NAME
 
@@ -58,7 +57,7 @@ sub _init
     my $self = shift;
     my $args = shift;
 
-    $self->_out($args->{output});
+    $self->_out( $args->{output} );
 
     $self->_init_stream();
 
@@ -70,7 +69,7 @@ sub _print
     my $self = shift;
     my $line = shift;
 
-    print {$self->_out()} $line, "\n";
+    print { $self->_out() } $line, "\n";
 }
 
 sub _init_stream
@@ -84,10 +83,10 @@ sub _init_stream
 
 sub put
 {
-    my $self = shift;
+    my $self  = shift;
     my $token = shift;
 
-    $self->_print(JSON::MaybeXS->new(canonical => 1)->encode($token));
+    $self->_print( JSON::MaybeXS->new( canonical => 1 )->encode($token) );
     $self->_print("--/f");
 
     return;
@@ -97,7 +96,7 @@ sub close
 {
     my $self = shift;
 
-    return close($self->_out());
+    return close( $self->_out() );
 }
 
 =head1 AUTHOR
@@ -154,4 +153,4 @@ This program is released under the following license: MIT/X11 Licence.
 
 =cut
 
-1; # End of File::Dir::Dumper
+1;    # End of File::Dir::Dumper

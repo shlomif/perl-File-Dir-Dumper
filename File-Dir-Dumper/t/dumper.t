@@ -105,7 +105,7 @@ _load_indirect_test_dependencies();
     is(
         $token->{perms},
         sprintf( "%04o",
-            ( ( stat( $t->get_path("$test_dir/a.doc") ) )[2] & 07777 ) ),
+            ( ( stat( $t->get_path("$test_dir/a.doc") ) )[2] & oct("07777") ) ),
         "perms are OK."
     );
 
@@ -144,7 +144,7 @@ _load_indirect_test_dependencies();
     is(
         $token->{perms},
         sprintf( "%04o",
-            ( ( stat( $t->get_path("$test_dir/b/") ) )[2] & 07777 ) ),
+            ( ( stat( $t->get_path("$test_dir/b/") ) )[2] & oct('07777') ) ),
         "perms are OK."
     );
 
