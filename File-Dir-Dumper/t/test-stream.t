@@ -5,10 +5,10 @@ use warnings;
 
 use Test::More tests => 12;
 
-use IO::String;
+use IO::String ();
 
-use File::Dir::Dumper::Stream::JSON::Writer;
-use File::Dir::Dumper::Stream::JSON::Reader;
+use File::Dir::Dumper::Stream::JSON::Writer ();
+use File::Dir::Dumper::Stream::JSON::Reader ();
 
 {
     my $buffer = <<"EOF";
@@ -19,7 +19,7 @@ use File::Dir::Dumper::Stream::JSON::Reader;
 --/f
 EOF
 
-    my $in = IO::String->new($buffer);
+    my $in     = IO::String->new($buffer);
     my $reader = File::Dir::Dumper::Stream::JSON::Reader->new(
         {
             input => $in,
@@ -27,22 +27,24 @@ EOF
     );
 
     # TEST
-    ok ($reader, "Reader was initialised");
+    ok( $reader, "Reader was initialised" );
 
     # TEST
-    is_deeply($reader->fetch(),
-        {want => "me",},
+    is_deeply(
+        $reader->fetch(),
+        { want => "me", },
         "->fetch() works for first token",
     );
 
     # TEST
-    is_deeply($reader->fetch(),
-        {want => "you",},
+    is_deeply(
+        $reader->fetch(),
+        { want => "you", },
         "->fetch works for second token",
     );
 
     # TEST
-    ok(!defined($reader->fetch), "No more tokens");
+    ok( !defined( $reader->fetch ), "No more tokens" );
 }
 
 {
@@ -54,7 +56,7 @@ EOF
 --/f
 EOF
 
-    my $in = IO::String->new($buffer);
+    my $in     = IO::String->new($buffer);
     my $reader = File::Dir::Dumper::Stream::JSON::Reader->new(
         {
             input => $in,
@@ -62,12 +64,13 @@ EOF
     );
 
     # TEST
-    ok ($reader, "Reader was initialised");
+    ok( $reader, "Reader was initialised" );
 
     # TEST
-    is_deeply($reader->fetch(),
+    is_deeply(
+        $reader->fetch(),
         {
-            type => "wonder",
+            type     => "wonder",
             "param1" => [qw(one two three)],
             "param2" => "Lo and behold",
         },
@@ -75,7 +78,8 @@ EOF
     );
 
     # TEST
-    is_deeply($reader->fetch(),
+    is_deeply(
+        $reader->fetch(),
         {
             type => "global",
             byte => { zero => "conf", },
@@ -84,7 +88,7 @@ EOF
     );
 
     # TEST
-    ok(!defined($reader->fetch), "No more tokens");
+    ok( !defined( $reader->fetch ), "No more tokens" );
 }
 
 {
@@ -98,9 +102,14 @@ EOF
         }
     );
 
-    $writer->put({type => "FooType", place => "home"});
+    $writer->put( { type => "FooType", place => "home" } );
 
-    $writer->put({type => "BarType", array => [qw(the perl gods help them that help themselves)],});
+    $writer->put(
+        {
+            type  => "BarType",
+            array => [qw(the perl gods help them that help themselves)],
+        }
+    );
 
     $writer->close();
 
@@ -113,24 +122,26 @@ EOF
     );
 
     # TEST
-    ok ($reader, "Reader was initialised");
+    ok( $reader, "Reader was initialised" );
 
     # TEST
-    is_deeply(scalar($reader->fetch()),
-        {type => "FooType", place => "home"},
+    is_deeply(
+        scalar( $reader->fetch() ),
+        { type => "FooType", place => "home" },
         "->fetch() reads what writer wrote",
     );
 
     # TEST
-    is_deeply(scalar($reader->fetch()),
+    is_deeply(
+        scalar( $reader->fetch() ),
         {
-            type => "BarType",
+            type  => "BarType",
             array => [qw(the perl gods help them that help themselves)],
         },
         "->fetch works for second token (containing a hashref)",
     );
 
     # TEST
-    ok(!defined($reader->fetch), "No more tokens");
+    ok( !defined( $reader->fetch ), "No more tokens" );
 }
 

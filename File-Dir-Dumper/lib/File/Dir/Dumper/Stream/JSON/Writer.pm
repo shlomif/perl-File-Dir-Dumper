@@ -7,7 +7,7 @@ use 5.012;
 
 use parent 'File::Dir::Dumper::Base';
 
-use Carp;
+use Carp ();
 
 use JSON::MaybeXS ();
 use Class::XSAccessor

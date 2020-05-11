@@ -7,11 +7,10 @@ use 5.012;
 
 use parent 'File::Dir::Dumper::Base';
 
-use Carp;
+use Carp ();
 
 use JSON::MaybeXS qw(decode_json);
-use Class::XSAccessor
-    accessors => { _in => 'in' };
+use Class::XSAccessor accessors => { _in => 'in' };
 
 =head1 NAME
 
@@ -49,7 +48,7 @@ sub _init
     my $self = shift;
     my $args = shift;
 
-    $self->_in($args->{input});
+    $self->_in( $args->{input} );
 
     $self->_init_stream();
 
@@ -60,21 +59,21 @@ sub _readline
 {
     my $self = shift;
 
-    return readline($self->_in());
+    return readline( $self->_in() );
 }
 
 sub _eof
 {
     my $self = shift;
 
-    return eof($self->_in());
+    return eof( $self->_in() );
 }
 
 sub _init_stream
 {
     my $self = shift;
 
-    if ($self->_readline() ne "# JSON Stream by Shlomif - Version 0.2.0\n")
+    if ( $self->_readline() ne "# JSON Stream by Shlomif - Version 0.2.0\n" )
     {
         Carp::confess "No header for JSON stream";
     }
@@ -89,16 +88,16 @@ sub fetch
     my $buffer = "";
     my $line;
 
-    if ($self->_eof())
+    if ( $self->_eof() )
     {
         return;
     }
 
-    LINES:
-    while (!$self->_eof())
+LINES:
+    while ( !$self->_eof() )
     {
         $line = $self->_readline();
-        if ($line eq "--/f\n")
+        if ( $line eq "--/f\n" )
         {
             return decode_json($buffer);
         }
@@ -164,4 +163,4 @@ This program is released under the following license: MIT/X11 Licence.
 
 =cut
 
-1; # End of File::Dir::Dumper
+1;    # End of File::Dir::Dumper

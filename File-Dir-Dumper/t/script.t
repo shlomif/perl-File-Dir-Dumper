@@ -6,23 +6,20 @@ use warnings;
 use Test::More tests => 2;
 
 use POSIX qw(mktime strftime);
-use File::Path;
-use English;
+use File::Path qw( rmtree );
 
-use File::Spec;
-use lib File::Spec->catdir(File::Spec->curdir(), "t", "lib");
+use File::Spec ();
+use lib File::Spec->catdir( File::Spec->curdir(), "t", "lib" );
 
-use File::Find::Object::TreeCreate;
-use File::Dir::Dumper::Stream::JSON::Reader;
+use File::Find::Object::TreeCreate          ();
+use File::Dir::Dumper::Stream::JSON::Reader ();
 
 {
-    my $tree =
-    {
+    my $tree = {
         'name' => "traverse-1/",
-        'subs' =>
-        [
+        'subs' => [
             {
-                'name' => "a.doc",
+                'name'     => "a.doc",
                 'contents' => "This file was spotted in the wild.",
             },
             {
@@ -30,8 +27,7 @@ use File::Dir::Dumper::Stream::JSON::Reader;
             },
             {
                 'name' => "foo/",
-                'subs' =>
-                [
+                'subs' => [
                     {
                         'name' => "yet/",
                     },
@@ -41,14 +37,12 @@ use File::Dir::Dumper::Stream::JSON::Reader;
     };
 
     my $t = File::Find::Object::TreeCreate->new();
-    $t->create_tree("./t/sample-data/", $tree);
+    $t->create_tree( "./t/sample-data/", $tree );
 
     my $test_dir = "t/sample-data/traverse-1";
-    my $out_file = File::Spec->catfile("t", "sample-data", "out.txt");
+    my $out_file = File::Spec->catfile( "t", "sample-data", "out.txt" );
 
-    my $ret =
-    system(
-        $^X,
+    my $ret = system( $^X,
         "-Mblib",
         "-e",
         <<'EOF',
@@ -65,8 +59,7 @@ EOF
     );
 
     # TEST
-    ok (!$ret, "system returned OK.");
-
+    ok( !$ret, "system returned OK." );
 
     open my $from_out, "<", $out_file;
 
@@ -79,13 +72,12 @@ EOF
     my $token = $reader->fetch();
 
     # TEST
-    is ($token->{'type'}, "header",
-        "Token type is header - file was written OK."
-    );
+    is( $token->{'type'}, "header",
+        "Token type is header - file was written OK." );
 
     # Cleanup.
     close($from_out);
     undef($reader);
-    rmtree($t->get_path($test_dir));
+    rmtree( $t->get_path($test_dir) );
     unlink($out_file);
 }

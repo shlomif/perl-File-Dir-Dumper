@@ -7,7 +7,7 @@ use Test::More tests => 5;
 
 use File::Temp qw/ tempdir /;
 
-use File::Dir::Dumper::DigestCache::FS;
+use File::Dir::Dumper::DigestCache::FS ();
 
 {
     my $tempdir = tempdir( CLEANUP => 1);

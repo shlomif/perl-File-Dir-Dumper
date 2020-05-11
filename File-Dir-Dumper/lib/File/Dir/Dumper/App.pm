@@ -7,23 +7,20 @@ use 5.012;
 
 use parent 'File::Dir::Dumper::Base';
 
-use Carp;
-
 use Getopt::Long qw(GetOptionsFromArray);
-use Pod::Usage;
+use Pod::Usage qw( pod2usage );
 
-use File::Dir::Dumper::Scanner;
-use File::Dir::Dumper::Stream::JSON::Writer;
+use File::Dir::Dumper::Scanner              ();
+use File::Dir::Dumper::Stream::JSON::Writer ();
 
-use Class::XSAccessor
-    accessors => {
-        _digest_cache => '_digest_cache',
-        _digest_cache_params => '_digest_cache_params',
-        _digests => '_digests',
-        _out_to_stdout => '_out_to_stdout',
-        _out_filename => '_out_filename',
-        _dir_to_dump => '_dir_to_dump',
-    };
+use Class::XSAccessor accessors => {
+    _digest_cache        => '_digest_cache',
+    _digest_cache_params => '_digest_cache_params',
+    _digests             => '_digests',
+    _out_to_stdout       => '_out_to_stdout',
+    _out_filename        => '_out_filename',
+    _dir_to_dump         => '_dir_to_dump',
+};
 
 =head1 NAME
 
@@ -59,25 +56,26 @@ sub _init
 
     my $output_dest;
     my @digests;
-    my ($help, $man);
+    my ( $help, $man );
     my $digest_cache = 'Dummy';
     my %cache_params;
 
-    GetOptionsFromArray($argv,
-        'digest-cache=s' => \$digest_cache,
+    GetOptionsFromArray(
+        $argv,
+        'digest-cache=s'       => \$digest_cache,
         'digest-cache-param=s' => \%cache_params,
-        "digest=s" => \@digests,
-        "output|o=s" => \$output_dest,
-        'help|h' => \$help,
-        'man' => \$man,
+        "digest=s"             => \@digests,
+        "output|o=s"           => \$output_dest,
+        'help|h'               => \$help,
+        'man'                  => \$man,
     ) or die "parsing options failed - $!";
 
-    pod2usage(1) if $help;
-    pod2usage(-exitstatus => 0, -verbose => 2) if $man;
+    pod2usage(1)                                 if $help;
+    pod2usage( -exitstatus => 0, -verbose => 2 ) if $man;
 
     my $dir_to_dump = shift(@$argv);
 
-    if (defined($output_dest))
+    if ( defined($output_dest) )
     {
         $self->_out_to_stdout(0);
         $self->_out_filename($output_dest);
@@ -86,10 +84,10 @@ sub _init
     {
         $self->_out_to_stdout(1);
     }
-    $self->_digests(\@digests);
+    $self->_digests( \@digests );
     $self->_dir_to_dump($dir_to_dump);
     $self->_digest_cache($digest_cache);
-    $self->_digest_cache_params(\%cache_params);
+    $self->_digest_cache_params( \%cache_params );
 
     return;
 }
@@ -99,7 +97,7 @@ sub run
     my $self = shift;
 
     my $out;
-    if ($self->_out_to_stdout())
+    if ( $self->_out_to_stdout() )
     {
         open $out, ">&STDOUT";
     }
@@ -113,10 +111,8 @@ sub run
     my $scanner = File::Dir::Dumper::Scanner->new(
         {
             dir => $self->_dir_to_dump(),
-            (
-                (@$digests ? (digests => $digests) : ()),
-            ),
-            digest_cache => $self->_digest_cache,
+            ( ( @$digests ? ( digests => $digests ) : () ), ),
+            digest_cache        => $self->_digest_cache,
             digest_cache_params => $self->_digest_cache_params,
         }
     );
@@ -126,7 +122,7 @@ sub run
         }
     );
 
-    while (defined(my $token = $scanner->fetch()))
+    while ( defined( my $token = $scanner->fetch() ) )
     {
         $writer->put($token);
     }
@@ -190,4 +186,4 @@ This program is released under the following license: MIT/X11 Licence.
 
 =cut
 
-1; # End of File::Dir::Dumper
+1;    # End of File::Dir::Dumper
