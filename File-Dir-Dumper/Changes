@@ -1,3 +1,9 @@
+0.6.0   2020-05-11
+        - Convert weaver.ini to @SHLOMIF .
+        - Add .tidyallrc + cleanups.
+        - used/required modules revamp.
+        - Convert CI to .ci-gen.ini.
+
 v0.4.0  2017-04-23
         - Add the ::DigestCache::FS feature to speed up digests' calculations
         based on the files' mtimes.
