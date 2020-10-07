@@ -321,7 +321,7 @@ foreach my $is_cache ( 0, 1 )
     is_deeply(
         $token->{digests},
         +{
-            MD5 => '85878a491ed9a0e0164c5ee398a6ac74',
+            MD5       => '85878a491ed9a0e0164c5ee398a6ac74',
             'SHA-512' =>
 'de8e52b8e38dbd7072e1e73b8340bf357d5af4058fd0110132cb45a532e9506f366f0df4b221a889717304830954d6d53cded53020d465044da7547a87ed02ce',
         },
@@ -343,7 +343,7 @@ foreach my $is_cache ( 0, 1 )
     is_deeply(
         $token->{digests},
         +{
-            MD5 => '02e86f5c3569cf659e6d39644b681fd9',
+            MD5       => '02e86f5c3569cf659e6d39644b681fd9',
             'SHA-512' =>
 '5e8d0710ab13e35f252306006db7dda8e1d244ecbdf0ecacccf41c396bb9f547427890c0ec32c04f59ca079dc4d9e6ad57782804aea1282a926356a03cafaa00',
         },
