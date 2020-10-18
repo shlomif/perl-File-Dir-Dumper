@@ -29,7 +29,7 @@ _load_indirect_test_dependencies();
 
 {
     my $tree = {
-        'name' => "traverse-1/",
+        'name' => "traverse-dumper-t-foo/",
         'subs' => [
             {
                 'name'     => "a.doc",
@@ -52,7 +52,7 @@ _load_indirect_test_dependencies();
     my $t = File::Find::Object::TreeCreate->new();
     $t->create_tree( "./t/sample-data/", $tree );
 
-    my $test_dir = "t/sample-data/traverse-1";
+    my $test_dir = "t/sample-data/traverse-dumper-t-foo";
 
     my $a_doc_time = mktime( 1, 2, 3, 4, 5, 106 );
     utime( $a_doc_time, $a_doc_time, $t->get_path("$test_dir/a.doc") );
@@ -241,7 +241,7 @@ _load_indirect_test_dependencies();
 foreach my $is_cache ( 0, 1 )
 {
     my $tree = {
-        'name' => "traverse-1/",
+        'name' => "traverse-dumper-t/",
         'subs' => [
             {
                 'name'     => "a.doc",
@@ -265,7 +265,7 @@ foreach my $is_cache ( 0, 1 )
     my $t = File::Find::Object::TreeCreate->new();
     $t->create_tree( "./t/sample-data/", $tree );
 
-    my $test_dir = "t/sample-data/traverse-1";
+    my $test_dir = "t/sample-data/traverse-dumper-t";
 
     my $a_doc_time = mktime( 1, 2, 3, 4, 5, 106 );
     utime( $a_doc_time, $a_doc_time, $t->get_path("$test_dir/a.doc") );

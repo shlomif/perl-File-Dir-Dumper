@@ -16,7 +16,7 @@ use File::Dir::Dumper::Stream::JSON::Reader ();
 
 {
     my $tree = {
-        'name' => "traverse-1/",
+        'name' => "traverse-script-t/",
         'subs' => [
             {
                 'name'     => "a.doc",
@@ -39,7 +39,7 @@ use File::Dir::Dumper::Stream::JSON::Reader ();
     my $t = File::Find::Object::TreeCreate->new();
     $t->create_tree( "./t/sample-data/", $tree );
 
-    my $test_dir = "t/sample-data/traverse-1";
+    my $test_dir = "t/sample-data/traverse-script-t";
     my $out_file = File::Spec->catfile( "t", "sample-data", "out.txt" );
 
     my $ret = system( $^X,
