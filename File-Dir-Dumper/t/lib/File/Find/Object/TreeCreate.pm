@@ -82,8 +82,7 @@ sub ls
     opendir my $dir, $self->get_path(@_)
         or Carp::confess("opendir failed!");
     my @files =
-        sort { $a cmp $b }
-        grep { !( ( $_ eq "." ) || ( $_ eq ".." ) ) } readdir($dir);
+        sort { $a cmp $b } File::Spec->no_upwards( readdir($dir) );
     closedir($dir);
     return \@files;
 }
