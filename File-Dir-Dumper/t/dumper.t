@@ -11,11 +11,9 @@ use English qw( -no_match_vars );
 
 use Devel::CheckOS qw( os_is );
 
-use File::Spec ();
-use lib File::Spec->catdir( File::Spec->curdir(), "t", "lib" );
 use File::Temp qw/ tempdir /;
 
-use File::Find::Object::TreeCreate ();
+use File::TreeCreate ();
 
 use File::Dir::Dumper::Scanner ();
 
@@ -49,7 +47,7 @@ _load_indirect_test_dependencies();
         ],
     };
 
-    my $t = File::Find::Object::TreeCreate->new();
+    my $t = File::TreeCreate->new();
     $t->create_tree( "./t/sample-data/", $tree );
 
     my $test_dir = "t/sample-data/traverse-dumper-t-foo";
@@ -262,7 +260,7 @@ foreach my $is_cache ( 0, 1 )
         ],
     };
 
-    my $t = File::Find::Object::TreeCreate->new();
+    my $t = File::TreeCreate->new();
     $t->create_tree( "./t/sample-data/", $tree );
 
     my $test_dir = "t/sample-data/traverse-dumper-t";

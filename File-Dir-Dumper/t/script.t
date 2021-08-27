@@ -9,9 +9,8 @@ use POSIX qw(mktime strftime);
 use File::Path qw( rmtree );
 
 use File::Spec ();
-use lib File::Spec->catdir( File::Spec->curdir(), "t", "lib" );
 
-use File::Find::Object::TreeCreate          ();
+use File::TreeCreate                        ();
 use File::Dir::Dumper::Stream::JSON::Reader ();
 
 {
@@ -36,7 +35,7 @@ use File::Dir::Dumper::Stream::JSON::Reader ();
         ],
     };
 
-    my $t = File::Find::Object::TreeCreate->new();
+    my $t = File::TreeCreate->new();
     $t->create_tree( "./t/sample-data/", $tree );
 
     my $test_dir = "t/sample-data/traverse-script-t";
