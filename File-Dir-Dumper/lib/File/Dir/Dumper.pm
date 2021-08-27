@@ -5,6 +5,11 @@ use strict;
 
 use 5.012;
 
+sub AUTLOAD
+{
+    die "This is a stub module.";
+}
+
 =head1 NAME
 
 File::Dir::Dumper - dump directory structures' meta-data in a consistent and
@@ -12,16 +17,17 @@ machine-readable way.
 
 =head1 SYNOPSIS
 
-    use File::Dir::Dumper;
+This is a stub module.
 
-    my $dumper = File::Dir::Dumper->new(
-        {
-            output_to => \*STDOUT,
-            source => "/path/to/dir/to/dump",
-        }
-    );
+B<DO NOTE USE DIRECTLY!>
+
+See L<dir-dump> .
 
 =head1 METHODS
+
+=head2 AUTLOAD
+
+die on use.
 
 =head1 AUTHOR
 
