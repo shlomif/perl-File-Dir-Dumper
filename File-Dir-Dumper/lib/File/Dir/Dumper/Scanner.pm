@@ -299,6 +299,12 @@ sub _calc_file_or_dir_token
 
     my @stat = stat( $result->path() );
 
+    if ( not @stat )
+    {
+        Carp::confess(
+            "Could not successfully stat <<@{[$result->path()]}>> - $!");
+    }
+
     return {
         filename => $result->full_components()->[-1],
         depth    => scalar( @{ $result->full_components() } ),
