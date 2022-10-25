@@ -12,6 +12,8 @@ __END__
 
 =head1 NAME
 
+Format::JSON::Stream - a stream of JSON data.
+
 =head1 SYNOPSIS
 
 =head1 DESCRIPTION
