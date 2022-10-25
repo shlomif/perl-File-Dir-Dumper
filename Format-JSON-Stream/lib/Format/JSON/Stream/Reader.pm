@@ -1,11 +1,19 @@
 package Format::JSON::Stream::Reader;
 
-use warnings;
 use strict;
+use warnings;
+use 5.014;
 
-use 5.012;
+sub new
+{
+    my $class = shift;
 
-use parent 'File::Dir::Dumper::Base';
+    my $self = bless {}, $class;
+
+    $self->_init(@_);
+
+    return $self;
+}
 
 use Carp ();
 
