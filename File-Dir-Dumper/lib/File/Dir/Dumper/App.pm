@@ -8,10 +8,10 @@ use 5.012;
 use parent 'File::Dir::Dumper::Base';
 
 use Getopt::Long qw(GetOptionsFromArray);
-use Pod::Usage qw( pod2usage );
+use Pod::Usage   qw( pod2usage );
 
-use File::Dir::Dumper::Scanner              ();
-use File::Dir::Dumper::Stream::JSON::Writer ();
+use File::Dir::Dumper::Scanner   ();
+use Format::JSON::Stream::Writer ();
 
 use Class::XSAccessor accessors => {
     _digest_cache        => '_digest_cache',
@@ -116,7 +116,7 @@ sub run
             digest_cache_params => $self->_digest_cache_params,
         }
     );
-    my $writer = File::Dir::Dumper::Stream::JSON::Writer->new(
+    my $writer = Format::JSON::Stream::Writer->new(
         {
             output => $out,
         }

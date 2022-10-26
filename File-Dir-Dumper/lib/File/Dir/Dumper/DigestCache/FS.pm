@@ -10,10 +10,10 @@ use 5.012;
 
 use Class::XSAccessor accessors => { _path => '_path', };
 
-use File::Basename qw/ dirname /;
-use File::Spec ();
+use File::Basename  qw/ dirname /;
+use File::Spec      ();
 use File::Path 2.00 qw/ make_path /;
-use JSON::MaybeXS ();
+use JSON::MaybeXS   ();
 
 =head1 NAME
 

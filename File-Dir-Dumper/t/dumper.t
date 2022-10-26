@@ -5,9 +5,9 @@ use warnings;
 
 use Test::More tests => 62;
 
-use POSIX qw(mktime strftime);
+use POSIX      qw(mktime strftime);
 use File::Path qw( rmtree );
-use English qw( -no_match_vars );
+use English    qw( -no_match_vars );
 
 use Devel::CheckOS qw( os_is );
 

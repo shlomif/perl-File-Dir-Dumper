@@ -1,3 +1,6 @@
+0.6.5   2022-10-26
+    - Span-out https://metacpan.org/dist/Format-JSON-Stream .
+
 0.6.4   2021-08-30
      - Check for failed stat() calls and abort.
         - Thanks to depesz

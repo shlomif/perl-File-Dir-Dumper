@@ -5,13 +5,13 @@ use warnings;
 
 use Test::More tests => 2;
 
-use POSIX qw(mktime strftime);
+use POSIX      qw(mktime strftime);
 use File::Path qw( rmtree );
 
 use File::Spec ();
 
-use File::TreeCreate                        ();
-use File::Dir::Dumper::Stream::JSON::Reader ();
+use File::TreeCreate             ();
+use Format::JSON::Stream::Reader ();
 
 {
     my $tree = {
@@ -62,7 +62,7 @@ EOF
 
     open my $from_out, "<", $out_file;
 
-    my $reader = File::Dir::Dumper::Stream::JSON::Reader->new(
+    my $reader = Format::JSON::Stream::Reader->new(
         {
             input => $from_out,
         }

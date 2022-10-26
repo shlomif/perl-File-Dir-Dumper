@@ -1,16 +1,10 @@
 package File::Dir::Dumper::Stream::JSON::Writer;
 
-use warnings;
+use 5.014;
 use strict;
+use warnings;
 
-use 5.012;
-
-use parent 'File::Dir::Dumper::Base';
-
-use Carp ();
-
-use JSON::MaybeXS ();
-use Class::XSAccessor accessors => { _out => '_out' };
+use parent 'Format::JSON::Stream::Writer';
 
 =head1 NAME
 
@@ -18,7 +12,7 @@ File::Dir::Dumper::Stream::JSON::Writer - writer for a stream of JSON data.
 
 =head1 SYNOPSIS
 
-    use File::Dir::Dumper::Stream::JSON::Writer;
+    use File::Dir::Dumper::Stream::JSON::Writer ();
 
     my $writer = File::Dir::Dumper::Stream::JSON::Writer->new(
         {
@@ -51,53 +45,6 @@ Outputs the next token as serialized.
 Closes the output filehandle.
 
 =cut
-
-sub _init
-{
-    my $self = shift;
-    my $args = shift;
-
-    $self->_out( $args->{output} );
-
-    $self->_init_stream();
-
-    return;
-}
-
-sub _print
-{
-    my $self = shift;
-    my $line = shift;
-
-    print { $self->_out() } $line, "\n";
-}
-
-sub _init_stream
-{
-    my $self = shift;
-
-    $self->_print("# JSON Stream by Shlomif - Version 0.2.0");
-
-    return;
-}
-
-sub put
-{
-    my $self  = shift;
-    my $token = shift;
-
-    $self->_print( JSON::MaybeXS->new( canonical => 1 )->encode($token) );
-    $self->_print("--/f");
-
-    return;
-}
-
-sub close
-{
-    my $self = shift;
-
-    return close( $self->_out() );
-}
 
 =head1 AUTHOR
 

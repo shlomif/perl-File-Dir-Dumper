@@ -11,9 +11,9 @@ use parent 'File::Dir::Dumper::Base';
 use Carp ();
 
 use File::Find::Object ();
-use Devel::CheckOS qw( os_is );
+use Devel::CheckOS     qw( os_is );
 
-use POSIX qw(strftime);
+use POSIX      qw(strftime);
 use List::Util qw(min);
 
 use Class::XSAccessor accessors => {
