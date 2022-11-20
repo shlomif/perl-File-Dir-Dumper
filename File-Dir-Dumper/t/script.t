@@ -78,7 +78,6 @@ EOF
     close($from_out);
     undef($reader);
     rmtree( $t->get_path($test_dir) );
-    unlink($out_file);
 
     $ret = system( $^X,
         "-Mblib",
@@ -97,4 +96,6 @@ EOF
 
     # TEST
     pass("no infinite loop on empty dirpath.");
+
+    unlink($out_file);
 }
