@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 use POSIX      qw(mktime strftime);
 use File::Path qw( rmtree );
@@ -79,4 +79,22 @@ EOF
     undef($reader);
     rmtree( $t->get_path($test_dir) );
     unlink($out_file);
+
+    $ret = system( $^X,
+        "-Mblib",
+        "-e",
+        <<'EOF',
+use strict;
+use warnings;
+use File::Dir::Dumper::App ();
+
+my $app = File::Dir::Dumper::App->new({argv => \@ARGV});
+exit($app->run());
+EOF
+        "--",
+        "--output", $out_file,
+    );
+
+    # TEST
+    pass("no infinite loop on empty dirpath.");
 }

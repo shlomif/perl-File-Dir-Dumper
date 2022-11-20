@@ -37,7 +37,7 @@ hash-refs
 
 =head1 SYNOPSIS
 
-    use File::Dir::Dumper::Scanner;
+    use File::Dir::Dumper::Scanner ();
 
     my $scanner = File::Dir::Dumper::Scanner->new(
         {
@@ -162,19 +162,21 @@ sub _up_to_level
     my $self         = shift;
     my $target_level = shift;
 
-    my $last_result = $self->_last_result();
-
-    for my $level (
-        reverse( $target_level .. $#{ $last_result->dir_components() } ) )
+    if ( my $last_result = $self->_last_result() )
     {
-        $self->_add(
-            {
-                type  => "updir",
-                depth => $level + 1,
-            }
-        );
-    }
 
+        for my $level (
+            reverse( $target_level .. $#{ $last_result->dir_components() } ) )
+        {
+            $self->_add(
+                {
+                    type  => "updir",
+                    depth => $level + 1,
+                }
+            );
+        }
+
+    }
     return;
 }
 
@@ -184,7 +186,7 @@ sub _find_new_common_depth
 
     my $result      = $self->_result();
     my $last_result = $self->_last_result();
-
+    return 0 if ( ( !$last_result ) or ( !$result ) );
     my $depth = 0;
 
     my $upper_limit = min(
@@ -338,10 +340,19 @@ sub _populate_queue
     if ( !$self->_last_result() )
     {
         $self->_add( { type => "dir", depth => 0 } );
+        if ( !$self->_result() )
+        {
+            $self->_add( { type => "footer" } );
+
+            $self->_reached_end(1);
+        }
     }
     elsif ( !$self->_result() )
     {
-        $self->_up_to_level(-1);
+        if ( $self->_last_result() )
+        {
+            $self->_up_to_level(-1);
+        }
 
         $self->_add( { type => "footer" } );
 
