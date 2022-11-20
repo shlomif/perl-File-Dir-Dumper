@@ -74,6 +74,10 @@ sub _init
     pod2usage( -exitstatus => 0, -verbose => 2 ) if $man;
 
     my $dir_to_dump = shift(@$argv);
+    if ( not length $dir_to_dump )
+    {
+        die "dir_to_dump must be specified!";
+    }
 
     if ( defined($output_dest) )
     {
